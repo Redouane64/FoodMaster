@@ -14,9 +14,10 @@ namespace FoodMaster.WebSite.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly List<MenuItem> menuItems = new List<MenuItem>
+
+        public List<MenuItem> Menu { get; } = new List<MenuItem>
         {
-            new MenuItem 
+            new MenuItem
             {
                 Name = "French Fried",
                 Description = "Some quick example text to build on the card title and make up the bulk of the card's content.",
@@ -35,8 +36,6 @@ namespace FoodMaster.WebSite.Pages
                 Image = "/images/soup.jpg"
             },
         };
-
-        public List<MenuItem> Menu => menuItems;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
