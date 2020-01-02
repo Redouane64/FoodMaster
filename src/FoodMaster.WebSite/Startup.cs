@@ -27,7 +27,7 @@ namespace FoodMaster.WebSite
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options => {
                         options.LoginPath = "/account/login";
-                        options.LogoutPath = "/account/logout";
+                        options.LogoutPath = "/account/login?handler=SignOut";
                     });
         }
 
