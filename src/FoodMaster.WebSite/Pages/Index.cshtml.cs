@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FoodMaster.WebSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,6 +14,29 @@ namespace FoodMaster.WebSite.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly List<MenuItem> menuItems = new List<MenuItem>
+        {
+            new MenuItem 
+            {
+                Name = "French Fried",
+                Description = "Some quick example text to build on the card title and make up the bulk of the card's content.",
+                Image = "/images/french-fries.jpg"
+            },
+            new MenuItem
+            {
+                Name = "Hanburger XL Beef",
+                Description = "Some quick example text to build on the card title and make up the bulk of the card's content.",
+                Image = "/images/hamburger.jpg"
+            },
+            new MenuItem
+            {
+                Name = "Garlic Soup",
+                Description = "Some quick example text to build on the card title and make up the bulk of the card's content.",
+                Image = "/images/soup.jpg"
+            },
+        };
+
+        public List<MenuItem> Menu => menuItems;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
