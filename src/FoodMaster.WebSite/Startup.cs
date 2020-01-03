@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Data;
+using FoodMaster.WebSite.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +33,12 @@ namespace FoodMaster.WebSite
                         options.LoginPath = "/account/login";
                         options.LogoutPath = "/account/login?handler=SignOut";
                     });
+            services.AddAutoMapper(this.GetType().Assembly);
+            services.AddSingleton<JsonDataContext>(_ => JsonDataContext.Create());
+            services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Meals);
+            services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Ingredients);
+            services.AddScoped<IStockService, StockService>();
+            services.AddScoped<IMealsService, MealsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

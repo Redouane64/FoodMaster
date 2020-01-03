@@ -11,5 +11,6 @@ namespace FoodMaster.WebSite.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public int SelectedQuantity { get; set; }
+        public decimal Price { get; set; }
     }
 }
