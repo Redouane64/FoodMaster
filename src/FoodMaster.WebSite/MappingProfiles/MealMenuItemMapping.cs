@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FoodMaster.WebSite.MappingProfiles
 {
-    public class MealMenuItemMapper : Profile
+    public class MealMenuItemMapping : Profile
     {
-        public MealMenuItemMapper()
+        public MealMenuItemMapping()
         {
             CreateMap<Meal, MenuItem>();
         }
