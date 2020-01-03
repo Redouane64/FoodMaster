@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
                     <img src="~/images/taco_64px.png" alt="FoodMaster" />
@@ -23,7 +23,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-page="/Index">Menu</a>
+                            <a class="nav-link" href="/#meals">Meals</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/#dessert">Desserts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/#drinks">Drinks</a>
                         </li>
                     </ul>
                 </div>
