@@ -1,4 +1,4 @@
 ﻿namespace FoodMaster.WebSite.Domain
 {
-    public enum Category { Meal, Dessert, Drink }
+    public enum Category { Meals, Desserts, Drinks }
 }

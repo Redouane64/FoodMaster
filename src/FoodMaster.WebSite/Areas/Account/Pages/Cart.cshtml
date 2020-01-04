@@ -1,7 +1,51 @@
 ﻿@page
 @model FoodMaster.WebSite.CartModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@namespace FoodMaster.WebSite.Helpers
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h3>Meals In Cart</h3>
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 5%">#</th>
+                        <th scope="col" style="width: 30%">Meal</th>
+                        <th scope="col" style="width: 10%">Quantity</th>
+                        <th scope="col" style="width: 20%">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <th scope="row">
+
+                            </th>
+                            <td>
+                                @item.Item.Name
+                            </td>
+                            <td>
+                                <input type="number" asp-for="@item.Quantity" style="width:64px">
+                            </td>
+                            <td>
+                                @Currency.AsRubles(item.Price)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-4">
+            <h3>Order Details</h3>
+        </div>
+    </div>
+
+</div>

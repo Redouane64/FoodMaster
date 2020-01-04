@@ -239,5 +239,11 @@
             "price": 60,
             "image": "/images/pepsi.jpg"
         }
+    ],
+    "users": [
+
+    ],
+    "carts": [
+
     ]
 }

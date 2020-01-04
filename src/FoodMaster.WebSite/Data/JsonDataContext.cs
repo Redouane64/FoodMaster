@@ -30,5 +30,11 @@ namespace FoodMaster.WebSite.Data
 
         [JsonPropertyName("ingredients")]
         public ICollection<Ingredient> Ingredients { get; set; }
+
+        [JsonPropertyName("users")]
+        public ICollection<User> Users { get; set; }
+
+        [JsonPropertyName("carts")]
+        public ICollection<Cart> Carts { get; set; }
     }
 }
