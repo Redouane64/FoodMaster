@@ -7,7 +7,6 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-
 <div class="container">
     <div class="row">
         <div class="col-8">
@@ -15,33 +14,43 @@
             <table class="table table-hover table-sm">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 5%">#</th>
-                        <th scope="col" style="width: 30%">Meal</th>
-                        <th scope="col" style="width: 10%">Quantity</th>
-                        <th scope="col" style="width: 20%">Price</th>
+                        <th scope="col">Meal</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
                     </tr>
                 </thead>
+                @if (Model.CartItems.Any())
+                {
                 <tbody>
-                    @foreach (var item in Model.CartItems)
-                    {
-                        <tr>
-                            <th scope="row">
-
-                            </th>
-                            <td>
-                                @item.Item.Name
-                            </td>
-                            <td>
-                                <input type="number" asp-for="@item.Quantity" style="width:64px">
-                            </td>
-                            <td>
-                                @Currency.AsRubles(item.Price)
-                            </td>
-                        </tr>
-                    }
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td scope="row">
+                            @item.Item.Name
+                        </td>
+                        <td>
+                            <input type="number" asp-for="@item.Quantity" min="1" style="width:64px" oninput="updateItemQuantity(this, @item.Item.Id)" onkeydown="return false">
+                        </td>
+                        <td>
+                            @Currency.AsRubles(item.Price)
+                        </td>
+                    </tr>
+                }
                 </tbody>
+                <tfoot>
+                    <tr class="table-active">
+                        <th colspan="2">
+                            <h5 class="text-right">Total</h5>
+                        </th>
+                        <th>
+                            <h5 id="totalPriceText" class="text-left">
+                                @Currency.AsRubles(Model.CartItems.Sum(item => item.Price * item.Quantity))
+                            </h5>
+                        </th>
+                    </tr>
+                </tfoot>
+                }
             </table>
-
         </div>
         <div class="col-4">
             <h3>Order Details</h3>

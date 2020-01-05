@@ -3,8 +3,12 @@ using FoodMaster.WebSite.Domain;
 
 namespace FoodMaster.WebSite.Abstraction.Services
 {
-    public interface ICartService : IRepository<Meal>
+    public interface ICartService : IRepository<CartItem>
     {
-        bool Has(Meal item);
+        decimal GetCartTotal();
+        CartItem GetByItemId(int itemId);
+        void CreateFromItemId(int itemId);
+        void DeleteByItemId(int itemId);
+        bool HasItemWithId(int itemId);
     }
 }

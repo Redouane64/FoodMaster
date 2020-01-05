@@ -59,11 +59,12 @@ namespace FoodMaster.WebSite
                 
                 if (userCart == null)
                 {
-                    userCart = new Cart { UserId = userId, Meals = new List<Meal>() };
+                    userCart = new Cart { UserId = userId, Items = new List<CartItem>() };
                     carts.Add(userCart);
                 }
 
-                return new CartService(userCart.Meals);
+                var mealService = s.GetRequiredService<IMealsService>();
+                return new CartService(userCart.Items, mealService);
             });
         }
 

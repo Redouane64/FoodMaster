@@ -1,7 +1,12 @@
-﻿using FoodMaster.WebSite.Abstraction.Services;
+﻿using System;
+using System.Linq;
+using System.Net;
+using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 
 namespace FoodMaster.WebSite.Controllers
 {
@@ -22,29 +27,46 @@ namespace FoodMaster.WebSite.Controllers
         [HttpPost("{id:int}", Name = nameof(Create))]
         public IActionResult Create([FromRoute] int id)
         {
-            var meal = mealsService.Get(meal => meal.Id == id);
-
-            if (meal == null)
+            if (!mealsService.HasItemWithId(id))
             {
                 return NotFound();
             }
 
-            cartService.Create(meal);
+            cartService.CreateFromItemId(id);
 
             return Created("/cart", null);
+        }
+
+        [HttpPut("{id:int}", Name = nameof(Edit))]
+        [Produces("application/json")]
+        public IActionResult Edit([FromRoute] int id, [FromQuery] int quantity)
+        {
+            if (quantity is default(int))
+            {
+                return BadRequest();
+            }
+
+            if (!cartService.HasItemWithId(id))
+            {
+                return NotFound();
+            }
+
+            cartService.GetByItemId(id).Quantity = quantity;
+
+            var total = cartService.GetCartTotal();
+
+            return Ok(new { Total = Currency.AsRubles(total) });
         }
 
         [HttpDelete("{id:int}", Name = nameof(Delete))]
         public IActionResult Delete([FromRoute] int id)
         {
-            var meal = mealsService.Get(meal => meal.Id == id);
-
-            if (meal == null)
+            if (!mealsService.HasItemWithId(id))
             {
                 return NotFound();
             }
 
-            cartService.Delete(meal);
+            cartService.DeleteByItemId(id);
 
             return NoContent();
         }

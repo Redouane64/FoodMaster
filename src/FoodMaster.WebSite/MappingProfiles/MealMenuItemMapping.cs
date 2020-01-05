@@ -27,7 +27,7 @@ namespace FoodMaster.WebSite.MappingProfiles
 
             public bool Resolve(Meal source, MenuItem destination, bool sourceMember, bool destMember, ResolutionContext context)
             {
-                return cartService.Has(source);
+                return cartService.HasItemWithId(source.Id);
             }
         }
     }

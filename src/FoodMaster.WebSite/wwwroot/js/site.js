@@ -53,6 +53,28 @@ async function removeFromCart(element, data) {
     });
 }
 
+async function updateItemQuantity(element, data) {
+    let quantity = element.valueAsNumber;
+    let itemId = data;
+    let url = `${CART_URL}${itemId}?quantity=${quantity}`;
+
+    await runCartRequest(url, "PUT", {
+        onResponse: async (response) => {
+            if (!response.ok) {
+                element.setAttribute("value", quantity);
+                return;
+            }
+
+            var totalPriceElement = document.getElementById("totalPriceText");
+            totalPriceElement.innerHTML = (await response.json()).total;
+        },
+        onError: (error) => {
+            element.setAttribute("value", quantity);
+            console.log(error);
+        }
+    });
+}
+
 function runCartRequest(url, method, data) {
     return fetch(url, { method: method, credentials: 'same-origin' })
         .then(data.onResponse)

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using FoodMaster.WebSite.Abstraction.Repositories;
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
-using FoodMaster.WebSite.Exceptions;
 
 namespace FoodMaster.WebSite.Infrastructure.Services
 {
@@ -23,6 +21,11 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         public IEnumerable<Meal> GetAllByCategory(Category category)
         {
             return meals.Where(meal => meal.Category == category);
+        }
+
+        public bool HasItemWithId(int itemId)
+        {
+            return meals.Any(item => item.Id == itemId);
         }
 
 
