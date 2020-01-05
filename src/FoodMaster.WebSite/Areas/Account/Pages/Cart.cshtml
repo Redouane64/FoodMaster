@@ -17,6 +17,7 @@
                         <th scope="col">Meal</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 @if (Model.CartItems.Any())
@@ -28,21 +29,27 @@
                         <td scope="row">
                             @item.Item.Name
                         </td>
-                        <td>
+                        <td scope="row">
                             <input type="number" asp-for="@item.Quantity" min="1" style="width:64px" oninput="updateItemQuantity(this, @item.Item.Id)" onkeydown="return false">
                         </td>
-                        <td>
+                        <td scope="row">
                             @Currency.AsRubles(item.Price)
+                        </td>
+                        <td>
+                            <form class="form-inline" asp-area="Account" asp-page="Cart" asp-page-handler="DeleteItem">
+                                <input type="hidden" name="itemId" value="@item.Item.Id" />
+                                <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
+                            </form>
                         </td>
                     </tr>
                 }
                 </tbody>
                 <tfoot>
                     <tr class="table-active">
-                        <th colspan="2">
+                        <th scope="colgroup" colspan="2">
                             <h5 class="text-right">Total</h5>
                         </th>
-                        <th>
+                        <th scope="colgroup" colspan="2">
                             <h5 id="totalPriceText" class="text-left">
                                 @Currency.AsRubles(Model.CartItems.Sum(item => item.Price * item.Quantity))
                             </h5>

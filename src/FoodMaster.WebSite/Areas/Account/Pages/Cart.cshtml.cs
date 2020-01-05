@@ -27,5 +27,10 @@ namespace FoodMaster.WebSite
         {
 
         }
+
+        public void OnPost([FromForm]int itemId)
+        {            
+            cartService.DeleteByItemId(itemId);
+        }
     }
 }
