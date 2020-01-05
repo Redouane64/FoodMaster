@@ -23,22 +23,31 @@
         <div class="col-8">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h3 class="font-weight-light">@item.Name</h3>
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="font-weight-light">@item.Name</h3>
+                        </div>
+                        <div class="col">
+                            <h2 class="d-flex justify-content-end font-weight-bold">@Currency.AsRubles(item.Price)</h2>
+                        </div>
+                    </div>
                 </li>
                 <li class="list-group-item">
                     <p>@item.Description</p>
                 </li>
                 <li class="list-group-item">
-                    <h2 class="font-weight-bold">@Currency.AsRubles(item.Price)</h2>
-                    <div class="d-flex justify-content-lg-end">
-                        @if (item.InCart)
-                        {
-                            <input class="btn btn-sm btn-danger" type="button" value="Remove From Cart" onclick="removeFromCart(this,{id:@item.Id})">
-                        }
-                        else
-                        {
-                            <input class="btn btn-sm btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
-                        }
+                    <p></p>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-end">
+                    @if (item.InCart)
+                    {
+                        <input class="btn btn-danger" type="button" value="Remove From Cart" onclick="removeFromCart(this,{id:@item.Id})">
+                    }
+                    else
+                    {
+                        <input class="btn btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
+                    }
                     </div>
                 </li>
             </ul>
