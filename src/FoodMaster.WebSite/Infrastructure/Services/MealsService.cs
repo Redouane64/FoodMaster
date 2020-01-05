@@ -11,11 +11,12 @@ namespace FoodMaster.WebSite.Infrastructure.Services
     {
         private readonly ICollection<Meal> meals;
         private readonly IStockService stockService;
-
+        private readonly IRepository<Meal> _base;
         public MealsService(ICollection<Meal> meals, IStockService stockService)
         {
             this.meals = meals;
             this.stockService = stockService;
+            this._base = this as IRepository<Meal>;
         }
 
         public IEnumerable<Meal> GetAllByCategory(Category category)
@@ -26,6 +27,11 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         public bool HasItemWithId(int itemId)
         {
             return meals.Any(item => item.Id == itemId);
+        }
+
+        public Meal GetById(int id)
+        {
+            return _base.Get(meal => meal.Id == id);
         }
 
 

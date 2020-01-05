@@ -8,5 +8,6 @@ namespace FoodMaster.WebSite.Abstraction.Services
     {
         IEnumerable<Meal> GetAllByCategory(Category category);
         bool HasItemWithId(int itemId);
+        Meal GetById(int id);
     }
 }
