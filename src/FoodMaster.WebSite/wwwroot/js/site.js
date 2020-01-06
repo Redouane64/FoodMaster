@@ -82,9 +82,9 @@ function runCartRequest(url, method, data) {
 }
 
 function confirmOrder(checkBox) {
-    var confirmOrderButton = document.getElementById("sendOrder");
-    confirmOrderButton.classList.toggle("disabled");
+    var sendOrderButton = document.getElementById("sendOrder");
+    sendOrderButton.classList.toggle("disabled");
     
-    if (checkBox.checked) confirmOrderButton.disabled = "";
-    else confirmOrderButton.disabled = "disable";
+    if (checkBox.checked) sendOrderButton.disabled = "";
+    else sendOrderButton.disabled = "disable";
 }

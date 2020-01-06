@@ -43,7 +43,7 @@
                                 @Currency.AsRubles(item.Price)
                             </td>
                             <td>
-                                <form class="form-inline" asp-area="Account" asp-page="Cart" asp-page-handler="DeleteItem">
+                                <form class="form-inline" asp-area="Account" asp-page="Cart">
                                     <input type="hidden" name="itemId" value="@item.Item.Id" />
                                     <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
                                 </form>
@@ -70,29 +70,37 @@
         <h3>Order Details</h3>
         <form asp-area="Account" asp-page="Cart" asp-page-handler="SendOrder">
             <div class="form-group">
-                <label class="col-form-label" for="fullname">Full Name</label>
-                <input type="text" name="fullname" id="fullname" value="@Model.FullName" class="form-control" required>
+                <label class="col-form-label" asp-for="@Model.OrderDetails.FullName"></label>
+                <input class="form-control" asp-for="@Model.OrderDetails.FullName" value="@Model.FullName">
+                <small class="text-danger">
+                    <span asp-validation-for="@Model.OrderDetails.FullName"></span>
+                </small>
             </div>
             <div class="form-group">
-                <label class="col-form-label" for="address">Address</label>
-                <input type="text" name="address" id="address" class="form-control" required>
+                <label class="col-form-label" asp-for="@Model.OrderDetails.Address"></label>
+                <input class="form-control" asp-for="@Model.OrderDetails.Address">
+                <small>
+                    <span class="text-danger" asp-validation-for="@Model.OrderDetails.Address"></span>
+                </small>
             </div>
             <div class="form-group">
-                <label class="col-form-label" for="postalCode">Postal Code</label>
-                <input type="text" name="postalCode" id="postalCode" class="form-control col-md-4" required>
+                <label class="col-form-label" asp-for="@Model.OrderDetails.PostalCode"></label>
+                <input class="form-control col-md-4" asp-for="@Model.OrderDetails.PostalCode">
+                <small><span class="text-danger" asp-validation-for="@Model.OrderDetails.PostalCode"></span></small>
             </div>
             <div class="form-group">
-                <label class="col-form-label" for="phoneNumber">Phone Number</label>
-                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control col-md-6" required>
+                <label class="col-form-label" asp-for="@Model.OrderDetails.PhoneNumber"></label>
+                <input class="form-control col-md-6" asp-for="@Model.OrderDetails.PhoneNumber">
+                <small><span class="text-danger" asp-validation-for="@Model.OrderDetails.PhoneNumber"></span></small>
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="confirm" name="confirmed" required onchange="confirmOrder(this)">
-                    <label class="form-check-label" for="confirm">
-                        I confirm my order
-                    </label>
+                    <input class="form-check-input" asp-for="@Model.Confirmed" onchange="confirmOrder(this)">
+                    <label class="form-check-label" asp-for="@Model.Confirmed"></label>
+                    <small><span class="text-danger" asp-validation-for="@Model.Confirmed"></span></small>
                 </div>
             </div>
+            <div class="text-danger font-italic" asp-validation-summary="All"></div>
             <input class="btn btn-info disabled" type="submit" name="submit" id="sendOrder" value="Send Order" disabled="disabled" />
         </form>
     </div>
