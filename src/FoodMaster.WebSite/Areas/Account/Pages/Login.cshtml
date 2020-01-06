@@ -23,22 +23,21 @@
 <div class="row">
     <div class="col">
         <div class="d-flex justify-content-center">
-            <form method="post">
+            <form asp-area="Account" asp-page="Login">
                 <div class="form-group">
-                    <label asp-for="FullName">Full Name</label>
-                    <input class="form-control form-control-sm" type="text" name="fullname" placeholder="Your fullname" required>
-                    <span asp-validation-for="FullName" class="text-danger"></span>
+                    <label asp-for="@Model.Credentials.FullName"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Credentials.FullName" placeholder="Your full name">
+                    <small class="text-danger"><span asp-validation-for="@Model.Credentials.FullName"></span></small>
                 </div>
                 <div class="form-group">
-                    <label asp-for="BirthDate">Birth Date</label>
-                    <input class="form-control form-control-sm" type="date" name="birthDate" placeholder="Selected Birth Date" required>
-                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    <label asp-for="@Model.Credentials.BirthDate"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.Credentials.BirthDate" placeholder="your birth date">
+                    <small class="text-danger"><span asp-validation-for="@Model.Credentials.BirthDate"></span></small>
                 </div>
                 <div class="d-flex justify-content-center">
                     <input class="btn btn-sm btn-success" type="submit" name="login" value="Log In" />
                 </div>
             </form>
-            <div asp-validation-summary="All"></div>
         </div>
     </div>
 </div>

@@ -6,11 +6,13 @@ namespace FoodMaster.WebSite.Models
     public class LoginCredentials
     {
         [Required]
-        [RegularExpression("[a-zA-Z]+\\s[a-zA-Z]+")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Invalid date value")]
+        [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
     }
 }

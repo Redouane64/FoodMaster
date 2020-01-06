@@ -25,28 +25,28 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             this.usersService = usersService;
         }
 
-        [Required]
-        public string FullName { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        public LoginCredentials Credentials { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if(!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             var userId = Guid.NewGuid().ToString();
 
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, FullName),
-                new Claim(ClaimTypes.DateOfBirth, BirthDate.ToString())
+                new Claim(ClaimTypes.Name, Credentials.FullName),
+                new Claim(ClaimTypes.DateOfBirth, Credentials.BirthDate.ToString())
             };
 
             var user = new User
             {
-                FullName = FullName,
-                BirthDate = BirthDate,
+                FullName = Credentials.FullName,
+                BirthDate = Credentials.BirthDate,
                 Claims = new List<Claim>(claims)
             };
             
