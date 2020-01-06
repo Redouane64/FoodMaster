@@ -29,11 +29,11 @@
                         <div class="d-flex justify-content-center">
                             @if (item.InCart)
                             {
-                                <input class="btn btn-sm btn-danger" type="button" value="Remove" onclick="removeFromCart(this,{id:@item.Id})">
+                            <input class="btn btn-sm btn-danger" type="button" value="Remove" onclick="removeFromCart(this,{id:@item.Id})">
                             }
                             else
                             {
-                                <input class="btn btn-sm btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
+                            <input class="btn btn-sm btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
                             }
                         </div>
                     </li>

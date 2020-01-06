@@ -1,4 +1,5 @@
 ﻿@page "{id:int}"
+
 @inject IMealsService MealsService
 @inject IMapper mapper;
 
@@ -11,46 +12,44 @@
     var item = mapper.Map<MenuItem>(MealsService.GetById(id));
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <img src="@item.Image" alt="@item.Name" style="width: 100%" />
-                </li>
-            </ul>
-        </div>
-        <div class="col-8">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="font-weight-light">@item.Name</h3>
-                        </div>
-                        <div class="col">
-                            <h2 class="d-flex justify-content-end font-weight-bold">@Currency.AsRubles(item.Price)</h2>
-                        </div>
+<div class="row">
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <img src="@item.Image" alt="@item.Name" style="width: 100%" />
+            </li>
+        </ul>
+    </div>
+    <div class="col-8">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="font-weight-light">@item.Name</h3>
                     </div>
-                </li>
-                <li class="list-group-item">
-                    <p>@item.Description</p>
-                </li>
-                <li class="list-group-item">
-                    <p></p>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-end">
-                    @if (item.InCart)
-                    {
-                        <input class="btn btn-danger" type="button" value="Remove From Cart" onclick="removeFromCart(this,{id:@item.Id})">
-                    }
-                    else
-                    {
-                        <input class="btn btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
-                    }
+                    <div class="col">
+                        <h2 class="d-flex justify-content-end font-weight-bold">@Currency.AsRubles(item.Price)</h2>
                     </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <p>@item.Description</p>
+            </li>
+            <li class="list-group-item">
+                <p></p>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex justify-content-end">
+                @if (item.InCart)
+                {
+                <input class="btn btn-danger" type="button" value="Remove From Cart" onclick="removeFromCart(this,{id:@item.Id})">
+                }
+                else
+                {
+                <input class="btn btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
+                }
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

@@ -1,46 +1,45 @@
 ﻿@page
+
 @model FoodMaster.WebSite.Areas.Account.Pages.LoginModel
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     Layout = "~/Pages/Shared/_Layout.cshtml";
     ViewData["Title"] = "Login";
 }
 
-<div class="container">
+<div class="row">
+    <div class="col">
+        <div class="text-center">
+            <h1 class="display-4">Login as a guest</h1>
+        </div>
+        <p class="text-center font-italic text-danger">
+            You must enter your full name and date of birth to proceed.
+        </p>
+    </div>
+</div>
 
-    <div class="row">
-        <div class="col">
-            <div class="text-center">
-                <h1 class="display-4">Login as a guest</h1>
-            </div>
-            <p class="text-center font-italic text-danger">
-                You must enter your full name and date of birth to proceed.
-            </p>
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-center">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="FullName">Full Name</label>
+                    <input class="form-control form-control-sm" type="text" name="fullname" placeholder="Your fullname" required>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDate">Birth Date</label>
+                    <input class="form-control form-control-sm" type="date" name="birthDate" placeholder="Selected Birth Date" required>
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input class="btn btn-sm btn-success" type="submit" name="login" value="Log In" />
+                </div>
+            </form>
+            <div asp-validation-summary="All"></div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="d-flex justify-content-center">
-                <form method="post">
-                    <div class="form-group">
-                        <label asp-for="FullName">Full Name</label>
-                        <input class="form-control form-control-sm" type="text" name="fullname" placeholder="Your fullname" required>
-                        <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="BirthDate">Birth Date</label>
-                        <input class="form-control form-control-sm" type="date" name="birthDate" placeholder="Selected Birth Date" required>
-                        <span asp-validation-for="BirthDate" class="text-danger"></span>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <input class="btn btn-sm btn-success" type="submit" name="login" value="Log In" />
-                    </div>
-                </form>
-                <div asp-validation-summary="All"></div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
