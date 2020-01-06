@@ -80,3 +80,11 @@ function runCartRequest(url, method, data) {
         .then(data.onResponse)
         .catch(data.onError);
 }
+
+function confirmOrder(checkBox) {
+    var confirmOrderButton = document.getElementById("sendOrder");
+    confirmOrderButton.classList.toggle("disabled");
+    
+    if (checkBox.checked) confirmOrderButton.disabled = "";
+    else confirmOrderButton.disabled = "disable";
+}

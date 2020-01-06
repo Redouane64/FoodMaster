@@ -10,42 +10,46 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-8">
-            <h3>Meals In Cart</h3>
-            <table class="table table-hover table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">Meal</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                @if (Model.CartItems.Any())
-                {
+<div class="row d-flex justify-content-center">
+    <div class="alert alert-success" role="alert">
+        If your cart is complete you can submit an order by filling necessary details on the right and click Send Order.
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <h3>Cart</h3>
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Meal</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @if (Model.CartItems.Any())
+            {
                 <tbody>
-                @foreach (var item in Model.CartItems)
-                {
-                    <tr>
-                        <td scope="row">
-                            @item.Item.Name
-                        </td>
-                        <td scope="row">
-                            <input type="number" asp-for="@item.Quantity" min="1" style="width:64px" oninput="updateItemQuantity(this, @item.Item.Id)" onkeydown="return false">
-                        </td>
-                        <td scope="row">
-                            @Currency.AsRubles(item.Price)
-                        </td>
-                        <td>
-                            <form class="form-inline" asp-area="Account" asp-page="Cart" asp-page-handler="DeleteItem">
-                                <input type="hidden" name="itemId" value="@item.Item.Id" />
-                                <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
-                            </form>
-                        </td>
-                    </tr>
-                }
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td scope="row">
+                                @item.Item.Name
+                            </td>
+                            <td scope="row">
+                                <input type="number" asp-for="@item.Quantity" min="1" style="width:64px" oninput="updateItemQuantity(this, @item.Item.Id)" onkeydown="return false">
+                            </td>
+                            <td scope="row">
+                                @Currency.AsRubles(item.Price)
+                            </td>
+                            <td>
+                                <form class="form-inline" asp-area="Account" asp-page="Cart" asp-page-handler="DeleteItem">
+                                    <input type="hidden" name="itemId" value="@item.Item.Id" />
+                                    <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
                 <tfoot>
                     <tr class="table-active">
@@ -59,12 +63,37 @@
                         </th>
                     </tr>
                 </tfoot>
-                }
-            </table>
-        </div>
-        <div class="col-4">
-            <h3>Order Details</h3>
-        </div>
+            }
+        </table>
     </div>
-
+    <div class="col-4">
+        <h3>Order Details</h3>
+        <form asp-area="Account" asp-page="Cart" asp-page-handler="SendOrder">
+            <div class="form-group">
+                <label class="col-form-label" for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" value="@Model.FullName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="address">Address</label>
+                <input type="text" name="address" id="address" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="postalCode">Postal Code</label>
+                <input type="text" name="postalCode" id="postalCode" class="form-control col-md-4" required>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="phoneNumber">Phone Number</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control col-md-6" required>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="confirm" name="confirmed" required onchange="confirmOrder(this)">
+                    <label class="form-check-label" for="confirm">
+                        I confirm my order
+                    </label>
+                </div>
+            </div>
+            <input class="btn btn-info disabled" type="submit" name="submit" id="sendOrder" value="Send Order" disabled="disabled" />
+        </form>
+    </div>
 </div>
