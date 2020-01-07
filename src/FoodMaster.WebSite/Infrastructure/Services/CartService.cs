@@ -17,7 +17,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         {
             this.cart = cart;
             this.mealsService = mealsService;
-            this._base = this as IRepository<CartItem>;
+            _base = this as IRepository<CartItem>;
         }
 
         public decimal GetCartTotal()

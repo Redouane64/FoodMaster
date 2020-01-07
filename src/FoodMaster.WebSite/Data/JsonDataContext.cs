@@ -15,14 +15,20 @@ namespace FoodMaster.WebSite.Data
 
         public static JsonDataContext Create()
         {
-            var json = File.ReadAllText(filename);
+            var jsonStream = File.ReadAllText(filename);
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = false
             };
 
-            return JsonSerializer.Deserialize<JsonDataContext>(json, options);
+            return JsonSerializer.Deserialize<JsonDataContext>(jsonStream, options);
+        }
+
+        public async Task WriteToUnderlyingFileAsync()
+        {
+            using var file = File.OpenWrite(filename);
+            await JsonSerializer.SerializeAsync<JsonDataContext>(file, this);
         }
 
         [JsonPropertyName("meals")]
@@ -36,5 +42,8 @@ namespace FoodMaster.WebSite.Data
 
         [JsonPropertyName("carts")]
         public ICollection<Cart> Carts { get; set; }
+
+        [JsonPropertyName("orders")]
+        public ICollection<Order> Orders { get; set; }
     }
 }

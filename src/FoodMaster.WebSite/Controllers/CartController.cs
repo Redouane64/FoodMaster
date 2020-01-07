@@ -1,18 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using FoodMaster.WebSite.Abstraction.Services;
+﻿using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Helpers;
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 
 namespace FoodMaster.WebSite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CartController : ControllerBase
     {
         private readonly IMealsService mealsService;

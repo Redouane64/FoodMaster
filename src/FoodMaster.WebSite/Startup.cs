@@ -7,6 +7,7 @@ using AutoMapper;
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Data;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Infrastructure.Services;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -38,6 +39,8 @@ namespace FoodMaster.WebSite
                     .AddCookie(options => {
                         options.LoginPath = "/account/login";
                         options.LogoutPath = "/account/login?handler=SignOut";
+                        options.ClaimsIssuer = "FoodMaster";
+                        
                     });
 
             services.AddAutoMapper(this.GetType().Assembly);
@@ -46,10 +49,12 @@ namespace FoodMaster.WebSite
             services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Meals);
             services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Ingredients);
             services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Users);
+            services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Orders);
 
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<IMealsService, MealsService>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IOrdersService, OrdersService>();
 
             services.AddHttpContextAccessor();
             services.AddScoped<ICartService>(s =>
@@ -68,6 +73,8 @@ namespace FoodMaster.WebSite
                 var mealService = s.GetRequiredService<IMealsService>();
                 return new CartService(userCart.Items, mealService);
             });
+
+            services.AddSingleton<WriteToDiskFilterAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

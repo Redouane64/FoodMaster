@@ -6,6 +6,8 @@ using System.Security.Claims;
 using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +15,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CartModel : PageModel
     {
         private readonly ICartService cartService;
+        private readonly IOrdersService ordersService;
         private readonly IMapper mapper;
 
-        public CartModel(ICartService cartService, IMapper mapper)
+        public CartModel(ICartService cartService, IOrdersService ordersService, IMapper mapper)
         {
             this.cartService = cartService;
+            this.ordersService = ordersService;
             this.mapper = mapper;
         }
 
-        public IEnumerable<CartItem> CartItems => mapper.Map<IEnumerable<CartItem>>(cartService.GetAll());
+        public IEnumerable<Models.CartItem> CartItems => mapper.Map<IEnumerable<Models.CartItem>>(cartService.GetAll());
 
         public string FullName => User.FindFirst(ClaimTypes.Name).Value;
 
@@ -55,6 +60,12 @@ namespace FoodMaster.WebSite
                 ModelState.AddModelError("Empty Cart", "You cannot send an order with an empty cart.");
                 return Page();
             }
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var orderItems = items.Select(item => new OrderItem { ItemId = item.ItemId, Quantity = item.Quantity }).ToList();
+
+            var order = new Order { Items = orderItems, UserId = userId };
+            ordersService.Create(order);
 
             return RedirectToPagePermanent("Index");
         }

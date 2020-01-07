@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite.Areas.Account.Pages
 {
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     [BindProperties]
     public class LoginModel : PageModel
     {
@@ -45,6 +47,7 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
 
             var user = new User
             {
+                Id = userId,
                 FullName = Credentials.FullName,
                 BirthDate = Credentials.BirthDate,
                 Claims = new List<Claim>(claims)
