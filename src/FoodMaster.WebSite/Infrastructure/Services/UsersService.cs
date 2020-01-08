@@ -35,5 +35,10 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         {
             return users;
         }
+
+        public User GetById(string userId)
+        {
+            return Get(u => u.Id == userId);
+        }
     }
 }

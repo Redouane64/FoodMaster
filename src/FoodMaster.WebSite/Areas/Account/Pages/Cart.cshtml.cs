@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
@@ -15,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
-    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
+    //[ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CartModel : PageModel
     {
         private readonly ICartService cartService;
@@ -29,7 +30,7 @@ namespace FoodMaster.WebSite
             this.mapper = mapper;
         }
 
-        public IEnumerable<Models.CartItem> CartItems => mapper.Map<IEnumerable<Models.CartItem>>(cartService.GetAll());
+        public IEnumerable<ViewModels.CartItem> CartItems => mapper.Map<IEnumerable<ViewModels.CartItem>>(cartService.GetAll());
 
         public string FullName => User.FindFirst(ClaimTypes.Name).Value;
 
@@ -61,13 +62,23 @@ namespace FoodMaster.WebSite
                 return Page();
             }
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var orderItems = items.Select(item => new OrderItem { ItemId = item.ItemId, Quantity = item.Quantity }).ToList();
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var orderItems = items.Select(item => new Domain.OrderItem { ItemId = item.ItemId, Quantity = item.Quantity }).ToList();
+            var total = CartItems.Sum(ci => ci.Price * ci.Quantity);
+            cartService.Clear();
 
-            var order = new Order { Items = orderItems, UserId = userId };
+            var order = new Order {
+                Items = orderItems,
+                UserId = userId,
+                Address = $"{OrderDetails.Address}, {OrderDetails.PostalCode}.",
+                PhoneNumber = OrderDetails.PhoneNumber,
+                Date = DateTime.Now,
+                Total = total
+            };
+
             ordersService.Create(order);
 
-            return RedirectToPagePermanent("Index");
+            return RedirectToPagePermanent("Orders");
         }
 
         public void OnPost([FromForm]int itemId)

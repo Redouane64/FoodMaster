@@ -81,5 +81,10 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         {
             cart.Remove(item);
         }
+
+        public void Clear()
+        {
+            cart.Clear();
+        }
     }
 }

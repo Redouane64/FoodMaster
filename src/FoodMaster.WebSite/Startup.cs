@@ -63,7 +63,7 @@ namespace FoodMaster.WebSite
                 var httpContextAccessor = s.GetRequiredService<IHttpContextAccessor>();
                 var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var userCart = carts.FirstOrDefault(cart => cart.UserId == userId);
-                
+
                 if (userCart == null)
                 {
                     userCart = new Cart { UserId = userId, Items = new List<CartItem>() };

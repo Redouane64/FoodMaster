@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
 using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite.Areas.Account.Pages
 {
-    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
+    //[ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     [BindProperties]
     public class LoginModel : PageModel
     {

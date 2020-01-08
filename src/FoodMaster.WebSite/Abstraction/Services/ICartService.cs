@@ -5,6 +5,7 @@ namespace FoodMaster.WebSite.Abstraction.Services
 {
     public interface ICartService : IRepository<CartItem>
     {
+        void Clear();
         decimal GetCartTotal();
         CartItem GetByItemId(int itemId);
         void CreateFromItemId(int itemId);

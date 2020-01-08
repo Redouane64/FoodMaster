@@ -2,7 +2,7 @@
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
-using FoodMaster.WebSite.Models;
+using FoodMaster.WebSite.ViewModels;
 
 namespace FoodMaster.WebSite.MappingProfiles
 {

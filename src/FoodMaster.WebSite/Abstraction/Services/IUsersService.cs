@@ -6,5 +6,6 @@ namespace FoodMaster.WebSite.Abstraction.Services
 {
     public interface IUsersService : IRepository<User>
     {
+        User GetById(string userId);
     }
 }

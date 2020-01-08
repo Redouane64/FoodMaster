@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FoodMaster.WebSite.Domain;
 
-namespace FoodMaster.WebSite.Models
+namespace FoodMaster.WebSite.ViewModels
 {
     public class CategoryMenu<TMenuItem>
     {

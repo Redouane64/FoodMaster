@@ -1,4 +1,4 @@
-﻿namespace FoodMaster.WebSite.Models
+﻿namespace FoodMaster.WebSite.ViewModels
 {
     public class MenuItem
     {

@@ -1,11 +1,10 @@
-﻿using FoodMaster.WebSite.Domain;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
+using FoodMaster.WebSite.Domain;
 
 namespace FoodMaster.WebSite.Data
 {
@@ -28,7 +27,15 @@ namespace FoodMaster.WebSite.Data
         public async Task WriteToUnderlyingFileAsync()
         {
             using var file = File.OpenWrite(filename);
-            await JsonSerializer.SerializeAsync<JsonDataContext>(file, this);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = false,
+                IgnoreNullValues = false,
+                WriteIndented = true
+            };
+
+            await JsonSerializer.SerializeAsync<JsonDataContext>(file, this, options);
         }
 
         [JsonPropertyName("meals")]

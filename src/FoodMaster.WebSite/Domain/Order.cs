@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FoodMaster.WebSite.Domain
 {
@@ -9,5 +10,12 @@ namespace FoodMaster.WebSite.Domain
         public ICollection<OrderItem> Items { get; set; }
 
         public OrderStatus Status { get; set; }
+
+        public string Address { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public DateTime Date { get; set; }
+        public decimal Total { get; set; }
     }
 }
