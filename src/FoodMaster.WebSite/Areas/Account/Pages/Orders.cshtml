@@ -23,8 +23,8 @@
             </tr>
         </thead>
         <tbody>
-            @if(!Model.Orders.Any())
-            {
+        @if(!Model.Orders.Any())
+        {
             <tr>
                 <td colspan="6">
                     <div class="d-flex justify-content-sm-center">
@@ -34,9 +34,9 @@
                     </div>
                 </td>
             </tr>
-            }
-            else
-            {
+        }
+        else
+        {
             foreach (var order in Model.Orders)
             {
             <tr>
@@ -51,7 +51,7 @@
                 </td>
             </tr>
             }
-            }
+        }
         </tbody>
     </table>
 </div>
