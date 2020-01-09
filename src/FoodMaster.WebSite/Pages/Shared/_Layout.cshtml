@@ -42,10 +42,7 @@
                                 <a class="nav-link" asp-area="Account" asp-page="Orders">Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Account" asp-page="Login" asp-page-handler="SignOut">Sign Out</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="navbar-text text-danger">Logged As: @User.Identity.Name</a>
+                                <a class="nav-link" asp-area="Account" asp-page="Login" asp-page-handler="SignOut">Sign Out(@User.Identity.Name)</a>
                             </li>
                         </ul>
                     </div>
