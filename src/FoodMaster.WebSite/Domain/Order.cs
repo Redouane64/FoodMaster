@@ -5,6 +5,8 @@ namespace FoodMaster.WebSite.Domain
 {
     public class Order
     {
+        public string Id { get; set; }
+
         public string UserId { get; set; }
 
         public ICollection<OrderItem> Items { get; set; }

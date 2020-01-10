@@ -1,15 +1,95 @@
-﻿@page "{id?}"
+﻿@page "{orderId?}"
 
 @model FoodMaster.WebSite.OrdersModel
 
 @using FoodMaster.WebSite.Helpers
+@using FoodMaster.WebSite.Extensions
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @{
     ViewData["Title"] = "Orders";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+@if (!String.IsNullOrEmpty(RouteData.Values["orderId"]?.ToString()))
+{
+<h3>Order Details</h3>
+<hr />
+
+<div class="row">
+    <div class="col">
+        <h4 class="font-weight-light text-info text-center">Information</h4>
+        <dl class="row">
+            <dt class="col-sm-3">Order</dt>
+            <dd class="col">@Model.Order.Id</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-3">Date</dt>
+            <dd class="col">@Model.Order.Date</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-3">Client</dt>
+            <dd class="col">@Model.Order.Client</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-3">Address</dt>
+            <dd class="col">@Model.Order.Address</dd>
+
+        </dl>            
+        <dl class="row">
+            <dt class="col-sm-3">Phone Number</dt>
+            <dd class="col">@Model.Order.PhoneNumber</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-3">Total Price</dt>
+            <dd class="col">@Currency.AsRubles(Model.Order.Total)</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-3">Order Status</dt>
+            <dd class="col">@Model.Order.Status.GetDescription()</dd>
+        </dl>    
+    </div>
+    <div class="col-6">
+        <h4 class="font-weight-light text-info text-center">Meals</h4>
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Meal</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Order.Items)
+                {
+                    <tr>
+                        <td scope="row">
+                            <a asp-area="" asp-page="Details" asp-route-id="@item.Item.Id">@item.Item.Name</a>
+                        </td>
+                        <td>
+                            @Currency.AsRubles(item.UnitPrice)
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @Currency.AsRubles(item.Price)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+}
+else
+{
 <h3>Orders</h3>
+
 <div class="row">
     <table class="table table-sm table-hover">
         <thead>
@@ -20,11 +100,12 @@
                 <th scope="col">Phone Number</th>
                 <th scope="col">Total</th>
                 <th scope="col">Status</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-        @if(!Model.Orders.Any())
-        {
+            @if (!Model.Orders.Any())
+            {
             <tr>
                 <td colspan="6">
                     <div class="d-flex justify-content-sm-center">
@@ -34,9 +115,9 @@
                     </div>
                 </td>
             </tr>
-        }
-        else
-        {
+            }
+            else
+            {
             foreach (var order in Model.Orders)
             {
             <tr>
@@ -45,13 +126,14 @@
                 <td>@order.Address</td>
                 <td>@order.PhoneNumber</td>
                 <td>@Currency.AsRubles(order.Total)</td>
-                <td>@order.Status</td>
+                <td>@order.Status.GetDescription()</td>
                 <td>
-                    <a class="btn btn-sm btn-info">Details</a> 
+                    <a asp-area="Account" asp-page="Orders" asp-route-orderId="@order.Id">See Details</a>
                 </td>
             </tr>
             }
-        }
+            }
         </tbody>
     </table>
 </div>
+}

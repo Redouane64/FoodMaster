@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
@@ -21,10 +22,29 @@ namespace FoodMaster.WebSite
 
         public IEnumerable<ViewModels.Order> Orders { get; set; }
 
-        public void OnGet()
+        public ViewModels.Order Order { get; set; }
+
+        public IActionResult OnGet([FromRoute]string orderId)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            Orders = mapper.Map<IEnumerable<ViewModels.Order>>(ordersService.GetOrdersByUserId(userId));
+
+            if (String.IsNullOrEmpty(orderId))
+            {
+                Orders = mapper.Map<IEnumerable<ViewModels.Order>>(ordersService.GetOrdersByUserId(userId));
+            }
+            else
+            {
+                var order = ordersService.Get(order => order.Id == orderId);
+                
+                if(order == null)
+                {
+                    return NotFound();
+                }
+
+                Order = mapper.Map<ViewModels.Order>(order);
+            }
+
+            return Page();
         }
     }
 }

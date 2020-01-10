@@ -68,6 +68,7 @@ namespace FoodMaster.WebSite
             cartService.Clear();
 
             var order = new Order {
+                Id = Guid.NewGuid().ToString(),
                 Items = orderItems,
                 UserId = userId,
                 Address = $"{OrderDetails.Address}, {OrderDetails.PostalCode}.",
