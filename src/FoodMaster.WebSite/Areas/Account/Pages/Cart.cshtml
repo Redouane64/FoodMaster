@@ -94,6 +94,10 @@
                 <small><span class="text-danger" asp-validation-for="@Model.OrderDetails.PhoneNumber"></span></small>
             </div>
             <div class="form-group">
+                <label class="col-form-label" asp-for="@Model.OrderDetails.Comments"></label>
+                <textarea class="form-control" asp-for="@Model.OrderDetails.Comments"></textarea>
+            </div>
+            <div class="form-group">
                 <div class="form-check">
                     <input class="form-check-input" asp-for="@Model.Confirmed" onchange="confirmOrder(this)">
                     <label class="form-check-label" asp-for="@Model.Confirmed"></label>

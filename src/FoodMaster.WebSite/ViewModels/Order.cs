@@ -14,5 +14,6 @@ namespace FoodMaster.WebSite.ViewModels
         public DateTime Date { get; set; }
         public OrderStatus Status { get; set; }
         public ICollection<OrderItem> Items { get; set; }
+        public string Comments { get; set; }
     }
 }

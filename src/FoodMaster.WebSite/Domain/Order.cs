@@ -19,5 +19,6 @@ namespace FoodMaster.WebSite.Domain
 
         public DateTime Date { get; set; }
         public decimal Total { get; set; }
+        public string Comments { get; set; }
     }
 }

@@ -19,5 +19,8 @@ namespace FoodMaster.WebSite.Models
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Comments { get; set; }
     }
 }

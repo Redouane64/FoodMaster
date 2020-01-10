@@ -74,7 +74,8 @@ namespace FoodMaster.WebSite
                 Address = $"{OrderDetails.Address}, {OrderDetails.PostalCode}.",
                 PhoneNumber = OrderDetails.PhoneNumber,
                 Date = DateTime.Now,
-                Total = total
+                Total = total,
+                Comments = OrderDetails.Comments
             };
 
             ordersService.Create(order);
