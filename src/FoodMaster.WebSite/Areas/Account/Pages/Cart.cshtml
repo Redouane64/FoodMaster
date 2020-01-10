@@ -34,7 +34,7 @@
                     {
                         <tr>
                             <td scope="row">
-                                @item.Item.Name
+                                <a asp-area="" asp-page="Details" asp-route-id="@item.Item.Id">@item.Item.Name</a>
                             </td>
                             <td scope="row">
                                 <input type="number" asp-for="@item.Quantity" min="1" style="width:64px" oninput="updateItemQuantity(this, @item.Item.Id)" onkeydown="return false">
