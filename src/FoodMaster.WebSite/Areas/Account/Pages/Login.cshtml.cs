@@ -65,6 +65,35 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
 
         public async Task<IActionResult> OnPostUserLoginAsync()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var user = usersService.FindByUserName(LoginCredentials.UserName);
+
+            if(user is null)
+            {
+                return Page();
+            }
+
+            if(!usersService.VerifyPassword(user, LoginCredentials.Password))
+            {
+                return Page();
+            }
+
+
+            var userId = Guid.NewGuid().ToString();
+
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId),
+            };
+
+            await HttpContext.SignInAsync(
+                new ClaimsPrincipal(
+                    new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
+
             return RedirectToPagePermanent("Index");
         }
 

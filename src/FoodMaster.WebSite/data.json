@@ -1,202 +1,216 @@
 {
-    "ingredients": [
-        {
-            "id": 0,
-            "name": "Milk",
-            "quantity": 1000
-        },
-        {
-            "id": 1,
-            "name": "Coffee",
-            "quantity": 1000
-        },
-        {
-            "id": 2,
-            "name": "Berries",
-            "quantity": 1000
-        },
-        {
-            "id": 3,
-            "name": "Chocolate",
-            "quantity": 1000
-        },
-        {
-            "id": 4,
-            "name": "Flour",
-            "quantity": 1000
-        },
-        {
-            "id": 5,
-            "name": "Cheese",
-            "quantity": 1000
-        },
-        {
-            "id": 6,
-            "name": "Coke",
-            "quantity": 1000
-        },
-        {
-            "id": 7,
-            "name": "Pepsi",
-            "quantity": 1000
-        },
-        {
-            "id": 8,
-            "name": "Beer",
-            "quantity": 1000
-        },
-        {
-            "id": 9,
-            "name": "Caramel",
-            "quantity": 1000
-        },
-        {
-            "id": 10,
-            "name": "Potato",
-            "quantity": 1000
-        },
-        {
-            "id": 11,
-            "name": "Tomato",
-            "quantity": 1000
-        },
-        {
-            "id": 12,
-            "name": "Garlic",
-            "quantity": 1000
-        },
-        {
-            "id": 13,
-            "name": "Water",
-            "quantity": 1000
-        },
-        {
-            "id": 14,
-            "name": "Carrot",
-            "quantity": 1000
-        },
-        {
-            "id": 15,
-            "name": "Oil",
-            "quantity": 1000
-        },
-        {
-            "id": 16,
-            "name": "Salad",
-            "quantity": 1000
-        },
-        {
-            "id": 17,
-            "name": "Chicken",
-            "quantity": 1000
-        },
-        {
-            "id": 18,
-            "name": "Beef",
-            "quantity": 1000
-        }
-    ],
-    "categories": [
-        {
-            "id": 0,
-            "name": "Meals"
-        },
-        {
-            "id": 1,
-            "name": "Desserts"
-        },
-        {
-            "id": 2,
-            "name": "Drinks"
-        }
-    ],
-    "meals": [
-        {
-            "id": 0,
-            "name": "French Fries",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 0,
-            "price": 120,
-            "image": "/images/french-fries.jpg"
-        },
-        {
-            "id": 1,
-            "name": "Garlic Soup",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 0,
-            "price": 180,
-            "image": "/images/soup.jpg"
-        },
-        {
-            "id": 2,
-            "name": "Chicken Nuggets",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 0,
-            "price": 100,
-            "image": "/images/chicken-nuggets.jpg"
-        },
-        {
-            "id": 3,
-            "name": "Hamburger XL Beef",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 0,
-            "price": 200,
-            "image": "/images/hamburger.jpg"
-        },
-        {
-            "id": 4,
-            "name": "Shawarma",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 0,
-            "price": 190,
-            "image": "/images/shawarma.jpg"
-        },
-        {
-            "id": 5,
-            "name": "Baby Yoda Ice Cream",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 1,
-            "price": 100,
-            "image": "/images/icecream.jpg"
-        },
-        {
-            "id": 6,
-            "name": "Jelly",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 1,
-            "price": 90,
-            "image": "/images/jelly.jpg"
-        },
-        {
-            "id": 7,
-            "name": "Berries Cheesecake",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 1,
-            "price": 150,
-            "image": "/images/cheesecake-with-berries.jpg"
-        },
-        {
-            "id": 8,
-            "name": "Cheesecake 100g",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 1,
-            "price": 120,
-            "image": "/images/cheesecake.jpg"
-        },
-        {
-            "id": 9,
-            "name": "Chocolate Cake",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 1,
-            "price": 140,
-            "image": "/images/cake-chocolate.jpg"
-        },
-        {
-            "id": 10,
-            "name": "Cake",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
-            "category": 1,
-            "price": 100,
+  "ingredients": [
+    {
+      "name": "Milk",
+      "quantity": 1000
+    },
+    {
+      "name": "Coffee",
+      "quantity": 1000
+    },
+    {
+      "name": "Berries",
+      "quantity": 1000
+    },
+    {
+      "name": "Chocolate",
+      "quantity": 1000
+    },
+    {
+      "name": "Flour",
+      "quantity": 1000
+    },
+    {
+      "name": "Cheese",
+      "quantity": 1000
+    },
+    {
+      "name": "Coke",
+      "quantity": 1000
+    },
+    {
+      "name": "Pepsi",
+      "quantity": 1000
+    },
+    {
+      "name": "Beer",
+      "quantity": 1000
+    },
+    {
+      "name": "Caramel",
+      "quantity": 1000
+    },
+    {
+      "name": "Potato",
+      "quantity": 1000
+    },
+    {
+      "name": "Tomato",
+      "quantity": 1000
+    },
+    {
+      "name": "Garlic",
+      "quantity": 1000
+    },
+    {
+      "name": "Water",
+      "quantity": 1000
+    },
+    {
+      "name": "Carrot",
+      "quantity": 1000
+    },
+    {
+      "name": "Oil",
+      "quantity": 1000
+    },
+    {
+      "name": "Salad",
+      "quantity": 1000
+    },
+    {
+      "name": "Chicken",
+      "quantity": 1000
+    },
+    {
+      "name": "Beef",
+      "quantity": 1000
+    }
+  ],
+  "meals": [
+    {
+      "id": 0,
+      "name": "French Fries",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 120,
+      "category": 0,
+      "image": "/images/french-fries.jpg"
+    },
+    {
+      "id": 1,
+      "name": "Garlic Soup",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 180,
+      "category": 0,
+      "image": "/images/soup.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Chicken Nuggets",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 100,
+      "category": 0,
+      "image": "/images/chicken-nuggets.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Hamburger XL Beef",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 200,
+      "category": 0,
+      "image": "/images/hamburger.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Shawarma",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 190,
+      "category": 0,
+      "image": "/images/shawarma.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Baby Yoda Ice Cream",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 100,
+      "category": 1,
+      "image": "/images/icecream.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Jelly",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 90,
+      "category": 1,
+      "image": "/images/jelly.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Berries Cheesecake",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 150,
+      "category": 1,
+      "image": "/images/cheesecake-with-berries.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Cheesecake 100g",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 120,
+      "category": 1,
+      "image": "/images/cheesecake.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Chocolate Cake",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 140,
+      "category": 1,
+      "image": "/images/cake-chocolate.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Cake",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 100,
+      "category": 1,
+      "image": "/images/cake-bread.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Coke 0.33L",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 40,
+      "category": 2,
+      "image": "/images/coke.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Milkshake 0.5L",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 60,
+      "category": 2,
+      "image": "/images/milkshake.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Beer 0.5L",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 80,
+      "category": 2,
+      "image": "/images/beer.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Coffee",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 70,
+      "category": 2,
+      "image": "/images/coffee.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Pepsi 0.33L",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam augue nisl, tincidunt ut malesuada eu, blandit nec nibh.",
+      "price": 60,
+      "category": 2,
+      "image": "/images/pepsi.jpg"
+    }
+  ],
+  "users": [],
+  "carts": [],
+  "orders": []
+}"price": 100,
             "image": "/images/cake-bread.jpg"
         },
         {
