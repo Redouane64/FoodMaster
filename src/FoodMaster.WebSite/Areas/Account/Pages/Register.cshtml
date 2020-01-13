@@ -1,0 +1,61 @@
+﻿@page
+
+@model FoodMaster.WebSite.RegisterModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Create an account";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="text-center">
+            <h1 class="display-4">Create an account</h1>
+        </div>
+        <p class="text-center font-italic text-danger">
+            You must fill all the fields below to proceed to use our service with your personel account.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-center">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="@Model.UserDetails.UserName"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.UserDetails.UserName" placeholder="Your user name">
+                    <small class="text-danger"><span asp-validation-for="@Model.UserDetails.UserName"></span></small>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.UserDetails.FullName"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.UserDetails.FullName" placeholder="Your full name">
+                    <small class="text-danger"><span asp-validation-for="@Model.UserDetails.FullName"></span></small>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.UserDetails.Password"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.UserDetails.Password" placeholder="Choose a password">
+                    <small class="text-danger"><span asp-validation-for="@Model.UserDetails.Password"></span></small>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.UserDetails.ConfirmPassword"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.UserDetails.ConfirmPassword" placeholder="Retype your password">
+                    <small class="text-danger"><span asp-validation-for="@Model.UserDetails.ConfirmPassword"></span></small>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.UserDetails.BirthDate"></label>
+                    <input class="form-control form-control-sm" asp-for="@Model.UserDetails.BirthDate" placeholder="Your birth date">
+                    <small class="text-danger"><span asp-validation-for="@Model.UserDetails.BirthDate"></span></small>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-success" type="submit" value="Create Account" />
+                    <a class="btn btn-outline-danger" asp-area="Account" asp-page="Login">Log in</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

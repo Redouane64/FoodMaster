@@ -9,42 +9,75 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="row">
-    <div class="col">
-        <div class="text-center">
-            <h1 class="display-4">Login as a guest</h1>
-        </div>
-        <p class="text-center font-italic text-danger">
-            You must enter your full name and date of birth to proceed.
-        </p>
-    </div>
-</div>
+
 
 <div class="row">
     <div class="col">
-        <div class="d-flex justify-content-center">
-            <form asp-area="Account" asp-page="Login">
-                <div class="form-group">
-                    <label asp-for="@Model.Credentials.FullName"></label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Credentials.FullName" placeholder="Your full name">
-                    <small class="text-danger"><span asp-validation-for="@Model.Credentials.FullName"></span></small>
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <h1 class="display-4">Login as a guest</h1>
                 </div>
-                <div class="form-group">
-                    <label asp-for="@Model.Credentials.BirthDate"></label>
-                    <input class="form-control form-control-sm" asp-for="@Model.Credentials.BirthDate" placeholder="your birth date">
-                    <small class="text-danger"><span asp-validation-for="@Model.Credentials.BirthDate"></span></small>
-                </div>
+                <p class="text-center font-italic text-danger">
+                    You must enter your full name and date of birth to proceed.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="d-flex justify-content-center">
-                    <input class="btn btn-sm btn-success" type="submit" name="login" value="Log In" />
+                    <form asp-area="Account" asp-page="Login" asp-page-handler="GuestLogin">
+                        <div class="form-group">
+                            <label asp-for="@Model.GuestCredentials.FullName"></label>
+                            <input class="form-control form-control-sm" asp-for="@Model.GuestCredentials.FullName" placeholder="Your full name">
+                            <small class="text-danger"><span asp-validation-for="@Model.GuestCredentials.FullName"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.GuestCredentials.BirthDate"></label>
+                            <input class="form-control form-control-sm" asp-for="@Model.GuestCredentials.BirthDate" placeholder="your birth date">
+                            <small class="text-danger"><span asp-validation-for="@Model.GuestCredentials.BirthDate"></span></small>
+                        </div>
+                        <div class="form-group d-flex justify-content-center">
+                            <input class="btn btn-success" type="submit" name="login" value="Proceed as Guest" />
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <div class="col">
-        <div class="d-flex justify-content-center">
-            <form asp-area="Account" asp-page="Login" asp-page-handler="IdentityLogin">
-
-            </form>
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <h1 class="display-4">Login with account</h1>
+                </div>
+                <p class="text-center font-italic text-danger">
+                    You must enter account credentials to proceed.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <form asp-area="Account" asp-page="Login" asp-page-handler="UserLogin">
+                        <div class="form-group">
+                            <label asp-for="@Model.LoginCredentials.UserName"></label>
+                            <input class="form-control form-control-sm" asp-for="@Model.LoginCredentials.UserName" placeholder="Your username">
+                            <small class="text-danger"><span asp-validation-for="@Model.LoginCredentials.UserName"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LoginCredentials.Password"></label>
+                            <input class="form-control form-control-sm" asp-for="@Model.LoginCredentials.Password" placeholder="Your password">
+                            <small class="text-danger"><span asp-validation-for="@Model.LoginCredentials.Password"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-success" type="submit" value="Log In" />
+                            <a class="btn btn-outline-danger" asp-area="Account" asp-page="Register">Create Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

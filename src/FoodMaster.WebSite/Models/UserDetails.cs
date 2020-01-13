@@ -14,7 +14,7 @@ namespace FoodMaster.WebSite.Models
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name = "Username")]
+        [Display(Name = "User Name")]
         [DataType(DataType.Text)]
         public string UserName { get; set; }
 

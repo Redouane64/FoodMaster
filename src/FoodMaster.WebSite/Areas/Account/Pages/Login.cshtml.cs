@@ -26,9 +26,11 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             this.usersService = usersService;
         }
 
-        public GuestCredentials Credentials { get; set; }
+        public GuestCredentials GuestCredentials { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public LoginCredentials LoginCredentials { get; set; }
+
+        public async Task<IActionResult> OnPostGuestLoginAsync()
         {
             if(!ModelState.IsValid)
             {
@@ -40,15 +42,15 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, Credentials.FullName),
-                new Claim(ClaimTypes.DateOfBirth, Credentials.BirthDate.ToString())
+                new Claim(ClaimTypes.Name, GuestCredentials.FullName),
+                new Claim(ClaimTypes.DateOfBirth, GuestCredentials.BirthDate.ToString())
             };
 
             var user = new User
             {
                 Id = userId,
-                FullName = Credentials.FullName,
-                BirthDate = Credentials.BirthDate,
+                FullName = GuestCredentials.FullName,
+                BirthDate = GuestCredentials.BirthDate,
                 Claims = new List<Claim>(claims)
             };
             
@@ -58,6 +60,11 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
                 new ClaimsPrincipal(
                     new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
 
+            return RedirectToPagePermanent("Index");
+        }
+
+        public async Task<IActionResult> OnPostUserLoginAsync()
+        {
             return RedirectToPagePermanent("Index");
         }
 
