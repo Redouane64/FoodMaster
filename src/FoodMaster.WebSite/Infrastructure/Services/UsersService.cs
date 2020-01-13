@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
@@ -21,9 +23,20 @@ namespace FoodMaster.WebSite.Infrastructure.Services
             users.Add(item);
         }
 
+        public void Create(User user, string password)
+        {
+            user.PasswordHash = ComputePasswordHash(password);
+            Create(user);
+        }
+
         public void Delete(User item)
         {
             users.Remove(item);
+        }
+
+        public User FindByUserName(string username)
+        {
+            return Get(user => user.UserName.Equals(username));
         }
 
         public User Get(Func<User, bool> predicate)
@@ -39,6 +52,20 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         public User GetById(string userId)
         {
             return Get(u => u.Id == userId);
+        }
+
+        public bool VerifyPassword(User user, string password)
+        {
+            return user.PasswordHash.Equals(ComputePasswordHash(password));
+        }
+
+        private string ComputePasswordHash(string password)
+        {
+            using var hashAlgorithm = SHA256.Create();
+
+            var passwordAsBytes = Encoding.ASCII.GetBytes(password);
+
+            return Convert.ToBase64String(hashAlgorithm.ComputeHash(passwordAsBytes));      
         }
     }
 }

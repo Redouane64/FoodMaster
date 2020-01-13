@@ -38,11 +38,11 @@ namespace FoodMaster.WebSite.Data
             await JsonSerializer.SerializeAsync<JsonDataContext>(file, this, options);
         }
 
-        [JsonPropertyName("meals")]
-        public ICollection<Meal> Meals { get; set; }
-
         [JsonPropertyName("ingredients")]
         public ICollection<Ingredient> Ingredients { get; set; }
+
+        [JsonPropertyName("meals")]
+        public ICollection<Meal> Meals { get; set; }
 
         [JsonPropertyName("users")]
         public ICollection<User> Users { get; set; }

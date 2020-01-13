@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite.Areas.Account.Pages
 {
-    //[ServiceFilter(typeof(WriteToDiskFilterAttribute))]
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     [BindProperties]
     public class LoginModel : PageModel
     {
@@ -26,7 +26,7 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             this.usersService = usersService;
         }
 
-        public LoginCredentials Credentials { get; set; }
+        public GuestCredentials Credentials { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {

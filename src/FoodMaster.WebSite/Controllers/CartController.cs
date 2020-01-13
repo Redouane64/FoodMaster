@@ -11,7 +11,7 @@ namespace FoodMaster.WebSite.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[ServiceFilter(typeof(WriteToDiskFilterAttribute))]
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CartController : ControllerBase
     {
         private readonly IMealsService mealsService;

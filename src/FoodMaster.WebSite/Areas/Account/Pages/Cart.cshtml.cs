@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
-    //[ServiceFilter(typeof(WriteToDiskFilterAttribute))]
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CartModel : PageModel
     {
         private readonly ICartService cartService;
