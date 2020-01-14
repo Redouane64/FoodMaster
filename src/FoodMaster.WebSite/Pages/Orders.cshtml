@@ -10,7 +10,6 @@
 
 @{
     ViewData["Title"] = "Orders";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 @if (!String.IsNullOrEmpty(RouteData.Values["orderId"]?.ToString()))
@@ -111,7 +110,7 @@ else
             @if (!Model.Orders.Any())
             {
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     <div class="d-flex justify-content-sm-center">
                         <em class="text-info">
                             You do not have any orders.
@@ -132,7 +131,7 @@ else
                 <td>@Currency.AsRubles(order.Total)</td>
                 <td>@order.Status.GetDescription()</td>
                 <td>
-                    <a asp-area="Account" asp-page="Orders" asp-route-orderId="@order.Id">See Details</a>
+                    <a asp-area="" asp-page="Orders" asp-route-orderId="@order.Id">See Details</a>
                 </td>
             </tr>
             }
