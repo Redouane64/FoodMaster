@@ -11,12 +11,14 @@ using FoodMaster.WebSite.Domain;
 using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
     [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
+    [Authorize]
     public class CartModel : PageModel
     {
         private readonly ICartService cartService;

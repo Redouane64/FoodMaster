@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+
 using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
+    [Authorize]
     public class OrdersModel : PageModel
     {
         private readonly IOrdersService ordersService;
@@ -26,7 +30,7 @@ namespace FoodMaster.WebSite
 
         public IActionResult OnGet([FromRoute]string orderId)
         {
-            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (String.IsNullOrEmpty(orderId))
             {

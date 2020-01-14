@@ -34,18 +34,23 @@ namespace FoodMaster.WebSite
             }
 
             var userId = Guid.NewGuid().ToString();
+            var assignedRole = Roles.User.ToString();
 
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Name, UserDetails.FullName),
+                new Claim(ClaimTypes.Role, assignedRole)
             };
 
             var user = new User
             {
                 Id = userId,
+                UserName = UserDetails.UserName,
                 FullName = UserDetails.FullName,
                 BirthDate = UserDetails.BirthDate,
-                Claims = new List<Claim>(claims)
+                Claims = new List<Claim>(claims),
+                Role = assignedRole
             };
 
             usersService.Create(user, UserDetails.Password);

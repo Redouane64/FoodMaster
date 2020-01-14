@@ -28,9 +28,8 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
 
         public GuestCredentials GuestCredentials { get; set; }
 
-        public LoginCredentials LoginCredentials { get; set; }
 
-        public async Task<IActionResult> OnPostGuestLoginAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             if(!ModelState.IsValid)
             {
@@ -38,20 +37,24 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             }
 
             var userId = Guid.NewGuid().ToString();
+            var assignedRole = Roles.Guest.ToString();
 
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
                 new Claim(ClaimTypes.Name, GuestCredentials.FullName),
-                new Claim(ClaimTypes.DateOfBirth, GuestCredentials.BirthDate.ToString())
+                new Claim(ClaimTypes.DateOfBirth, GuestCredentials.BirthDate.ToString()),
+                new Claim(ClaimTypes.Role, assignedRole)
             };
 
             var user = new User
             {
                 Id = userId,
+                UserName = userId,
                 FullName = GuestCredentials.FullName,
                 BirthDate = GuestCredentials.BirthDate,
-                Claims = new List<Claim>(claims)
+                Claims = new List<Claim>(claims),
+                Role = assignedRole
             };
             
             usersService.Create(user);
@@ -63,39 +66,6 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             return RedirectToPagePermanent("Index");
         }
 
-        public async Task<IActionResult> OnPostUserLoginAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var user = usersService.FindByUserName(LoginCredentials.UserName);
-
-            if(user is null)
-            {
-                return Page();
-            }
-
-            if(!usersService.VerifyPassword(user, LoginCredentials.Password))
-            {
-                return Page();
-            }
-
-
-            var userId = Guid.NewGuid().ToString();
-
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-            };
-
-            await HttpContext.SignInAsync(
-                new ClaimsPrincipal(
-                    new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
-
-            return RedirectToPagePermanent("Index");
-        }
 
         public async Task<IActionResult> OnGetSignOutAsync()
         {
@@ -105,7 +75,11 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             }
 
             var user = usersService.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            usersService.Delete(user);
+
+            if (user.Role.Equals(Roles.Guest.ToString()))
+            {
+                usersService.Delete(user);
+            }
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 

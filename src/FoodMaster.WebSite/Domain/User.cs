@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 
 namespace FoodMaster.WebSite.Domain
 {
@@ -16,7 +17,10 @@ namespace FoodMaster.WebSite.Domain
 
         public string PasswordHash { get; set; }
 
+        [JsonIgnore]
         public ICollection<Claim> Claims { get; set; }
+
+        public string Role { get; set; }
 
     }
 }

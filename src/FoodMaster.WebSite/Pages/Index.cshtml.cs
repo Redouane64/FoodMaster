@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
-using FoodMaster.WebSite.Data;
 using FoodMaster.WebSite.Domain;
-using FoodMaster.WebSite.Models;
 using FoodMaster.WebSite.ViewModels;
+
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace FoodMaster.WebSite.Pages
 {

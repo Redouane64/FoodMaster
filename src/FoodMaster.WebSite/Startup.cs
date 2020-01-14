@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -40,8 +41,12 @@ namespace FoodMaster.WebSite
                         options.LoginPath = "/account/login";
                         options.LogoutPath = "/account/login?handler=SignOut";
                         options.ClaimsIssuer = "FoodMaster";
-                        
+                        options.Cookie.MaxAge = TimeSpan.FromDays(5);
+                        options.Cookie.IsEssential = true;
+                        options.Cookie.Name = "FoodMaster";
+                        options.EventsType = typeof(CookieValidatorEvents);
                     });
+            services.AddScoped<CookieValidatorEvents>();
 
             services.AddAutoMapper(this.GetType().Assembly);
             
@@ -61,7 +66,8 @@ namespace FoodMaster.WebSite
             {
                 var carts = s.GetRequiredService<JsonDataContext>().Carts;
                 var httpContextAccessor = s.GetRequiredService<IHttpContextAccessor>();
-                var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 var userCart = carts.FirstOrDefault(cart => cart.UserId == userId);
 
                 if (userCart == null)

@@ -240,11 +240,7 @@
             "image": "/images/pepsi.jpg"
         }
     ],
-    "users": [
-
-    ],
-    "carts": [
-
-    ],
+    "users": [],
+    "carts": [],
     "orders": []
 }
