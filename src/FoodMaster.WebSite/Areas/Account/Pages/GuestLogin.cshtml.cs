@@ -17,11 +17,11 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
 {
     [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     [BindProperties]
-    public class LoginModel : PageModel
+    public class GuestLoginModel : PageModel
     {
         private readonly IUsersService usersService;
 
-        public LoginModel(IUsersService usersService)
+        public GuestLoginModel(IUsersService usersService)
         {
             this.usersService = usersService;
         }

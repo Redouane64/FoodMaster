@@ -82,7 +82,7 @@ namespace FoodMaster.WebSite
 
             ordersService.Create(order);
 
-            return RedirectToPagePermanent("UserOrders");
+            return RedirectToPagePermanent("MyOrders");
         }
 
         public void OnPost([FromForm]int itemId)
