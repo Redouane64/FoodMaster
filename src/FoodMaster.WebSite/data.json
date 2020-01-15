@@ -240,7 +240,16 @@
             "image": "/images/pepsi.jpg"
         }
     ],
-    "users": [],
+    "users": [
+        {
+            "Id": "6eeeeaa6-35c4-4d79-83b2-6ae281e4cfac",
+            "UserName": "admin",
+            "FullName": "Administrator",
+            "BirthDate": "1993-07-13T00:00:00",
+            "PasswordHash": "vLFfghR5tNV3K9DKhmwArV\u002BSbjWAcgZZzIDTnJ0JgCo=",
+            "Role": "Admin"
+        }
+    ],
     "carts": [],
     "orders": []
 }
