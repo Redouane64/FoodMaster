@@ -44,9 +44,13 @@ namespace FoodMaster.WebSite
         [Display(Name = "I confirm the order.", ShortName = "Confirm")]
         public bool Confirmed { get; set; }
 
+        [TempData]
+        public bool HasBirthDay { get; set; }
+
         public void OnGet()
         {
-            
+            var userBirthDate = HttpContext.User.FindFirstValue(ClaimTypes.DateOfBirth);
+            HasBirthDay = DateTime.Today.Subtract(Convert.ToDateTime(userBirthDate)).Days == 0;
         }
 
         public IActionResult OnPostSendOrder()

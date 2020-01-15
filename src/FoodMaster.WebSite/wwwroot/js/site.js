@@ -66,7 +66,12 @@ async function updateItemQuantity(element, data) {
             }
 
             var totalPriceElement = document.getElementById("totalPriceText");
-            totalPriceElement.innerHTML = (await response.json()).total;
+            var totalDiscountPriceElement = document.getElementById("totalDiscountPriceText");
+
+            var responseAsJson = await response.json();
+
+            totalPriceElement.innerHTML = responseAsJson.total;
+            totalDiscountPriceElement.innerHTML = responseAsJson.totalDiscount;
         },
         onError: (error) => {
             element.setAttribute("value", quantity);

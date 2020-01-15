@@ -59,6 +59,19 @@
                             </h5>
                         </th>
                     </tr>
+                    @if (Model.HasBirthDay)
+                    {
+                        <tr class="table-danger">                          
+                            <th scope="colgroup" colspan="2">
+                                <h5 class="text-right text-danger">Total With Discount</h5>
+                            </th>
+                            <th scope="colgroup" colspan="2">
+                                <h5 id="totalDiscountPriceText" class="text-left text-dark">
+                                    @Currency.AsRubles(Model.CartItems.Sum(item => (item.Price * 0.5m) * item.Quantity))
+                                </h5>
+                            </th>
+                        </tr>
+                    }
                 </tfoot>
             }
         </table>

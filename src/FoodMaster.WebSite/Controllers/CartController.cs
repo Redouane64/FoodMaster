@@ -54,7 +54,7 @@ namespace FoodMaster.WebSite.Controllers
 
             var total = cartService.GetCartTotal();
 
-            return Ok(new { Total = Currency.AsRubles(total) });
+            return Ok(new { Total = Currency.AsRubles(total), TotalDiscount = Currency.AsRubles(total * 0.5m) });
         }
 
         [HttpDelete("{id:int}", Name = nameof(Delete))]
