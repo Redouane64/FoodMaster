@@ -15,7 +15,7 @@ namespace FoodMaster.WebSite.Extensions
                 .GetField(orderStatus.ToString())
                 .GetCustomAttributes(false)
                 .OfType<DescriptionAttribute>()
-                .FirstOrDefault().Description ?? orderStatus.ToString();
+                .FirstOrDefault()?.Description ?? orderStatus.ToString();
         }
     }
 }
