@@ -27,7 +27,7 @@ namespace FoodMaster.WebSite
             {
                 context.RejectPrincipal();
                 await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                await RedirectToLogin(new RedirectContext<CookieAuthenticationOptions>(context.HttpContext, context.Scheme, context.Options, context.Properties, "account/login"));
+                await RedirectToLogin(new RedirectContext<CookieAuthenticationOptions>(context.HttpContext, context.Scheme, context.Options, context.Properties, "/Account/GuestLogin"));
             }
         }
     }

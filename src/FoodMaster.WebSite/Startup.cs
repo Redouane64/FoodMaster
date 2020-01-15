@@ -38,8 +38,8 @@ namespace FoodMaster.WebSite
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options => {
-                        options.LoginPath = "/account/login";
-                        options.LogoutPath = "/account/login?handler=SignOut";
+                        options.LoginPath = "/Account/GuestLogin";
+                        options.LogoutPath = "/Account/GuestLogin?handler=SignOut";
                         options.ClaimsIssuer = "FoodMaster";
                         options.Cookie.MaxAge = TimeSpan.FromDays(5);
                         options.Cookie.IsEssential = true;
