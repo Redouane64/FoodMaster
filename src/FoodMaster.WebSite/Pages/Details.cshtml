@@ -9,7 +9,7 @@
 
 @{
     var id = int.Parse(RouteData.Values["id"].ToString());
-    var item = mapper.Map<MenuItem>(MealsService.GetById(id));
+    var item = mapper.Map<ViewModels.Meal>(MealsService.GetById(id));
 }
 
 <div class="row">

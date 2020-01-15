@@ -35,12 +35,21 @@
                     </div>
                     <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse flex-sm-row-reverse">
                         <ul class="nav justify-content-end">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Account" asp-page="Cart">Cart</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-page="Orders" asp-route-orderId="">Orders</a>
-                            </li>
+                            @if (User.IsInRole(Roles.Admin.ToString()))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-page="Orders">Orders</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Account" asp-page="Cart">Cart</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="UserOrders" asp-route-orderId="">Orders</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Account" asp-page="Login" asp-page-handler="SignOut">Sign Out(@User.Identity.Name)</a>
                             </li>

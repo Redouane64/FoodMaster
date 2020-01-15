@@ -55,6 +55,7 @@ namespace FoodMaster.WebSite
             services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Ingredients);
             services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Users);
             services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Orders);
+            services.AddSingleton(s => s.GetRequiredService<JsonDataContext>().Categories);
 
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<IMealsService, MealsService>();

@@ -65,7 +65,7 @@ namespace FoodMaster.WebSite
             }
 
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var orderItems = items.Select(item => new Domain.OrderItem { ItemId = item.ItemId, Quantity = item.Quantity }).ToList();
+            var orderItems = items.Select(item => new Domain.OrderItem { MealId = item.ItemId, Quantity = item.Quantity }).ToList();
             var total = CartItems.Sum(ci => ci.Price * ci.Quantity);
             cartService.Clear();
 
@@ -82,7 +82,7 @@ namespace FoodMaster.WebSite
 
             ordersService.Create(order);
 
-            return RedirectToPagePermanent("Orders");
+            return RedirectToPagePermanent("UserOrders");
         }
 
         public void OnPost([FromForm]int itemId)

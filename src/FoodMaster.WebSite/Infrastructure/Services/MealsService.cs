@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using FoodMaster.WebSite.Abstraction.Repositories;
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
@@ -19,7 +20,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
             this._base = this as IRepository<Meal>;
         }
 
-        public IEnumerable<Meal> GetAllByCategory(Category category)
+        public IEnumerable<Meal> GetAllByCategoryId(int category)
         {
             return meals.Where(meal => meal.Category == category);
         }

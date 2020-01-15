@@ -15,7 +15,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 .ForMember(dest => dest.Price, options => options.MapFrom<PriceMemberValueResilver, Meal>(item => default));
         }
 
-        private class MealMemberValueResolver : IMemberValueResolver<Domain.CartItem, ViewModels.CartItem, int, Meal>
+        private class MealMemberValueResolver : IMemberValueResolver<Domain.CartItem, ViewModels.CartItem, int, Domain.Meal>
         {
             private readonly IMealsService mealsService;
 
@@ -24,7 +24,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 this.mealsService = mealsService;
             }
 
-            public Meal Resolve(Domain.CartItem source, ViewModels.CartItem destination, int sourceMember, Meal destMember, ResolutionContext context)
+            public Domain.Meal Resolve(Domain.CartItem source, ViewModels.CartItem destination, int sourceMember, Domain.Meal destMember, ResolutionContext context)
             {
                 return mealsService.Get(item => item.Id == source.ItemId);
             }

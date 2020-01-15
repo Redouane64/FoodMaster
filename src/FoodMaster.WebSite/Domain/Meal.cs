@@ -18,7 +18,7 @@ namespace FoodMaster.WebSite.Domain
         public decimal Price { get; set; }
 
         [JsonPropertyName("category")]
-        public Category Category { get; set; }
+        public int Category { get; set; }
 
         [JsonPropertyName("image")]
         public string Image { get; set; }

@@ -26,7 +26,7 @@ namespace FoodMaster.WebSite.Data
 
         public async Task WriteToUnderlyingFileAsync()
         {
-            using var file = File.OpenWrite(filename);
+            using var file = File.OpenWrite("current.json");
 
             var options = new JsonSerializerOptions
             {
@@ -40,6 +40,9 @@ namespace FoodMaster.WebSite.Data
 
         [JsonPropertyName("ingredients")]
         public ICollection<Ingredient> Ingredients { get; set; }
+
+        [JsonPropertyName("categories")]
+        public ICollection<Category> Categories { get; set; }
 
         [JsonPropertyName("meals")]
         public ICollection<Meal> Meals { get; set; }

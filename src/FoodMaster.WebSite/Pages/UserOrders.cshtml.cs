@@ -12,13 +12,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
-    [Authorize]
-    public class OrdersModel : PageModel
+    [Authorize(Roles = "User,Guest")]
+    public class UserOrdersModel : PageModel
     {
         private readonly IOrdersService ordersService;
         private readonly IMapper mapper;
 
-        public OrdersModel(IOrdersService ordersService, IMapper mapper)
+        public UserOrdersModel(IOrdersService ordersService, IMapper mapper)
         {
             this.ordersService = ordersService;
             this.mapper = mapper;
