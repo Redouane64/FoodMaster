@@ -79,3 +79,7 @@ body {
     padding-top: 0;
     padding-bottom: 0;
 }
+
+a:hover {
+    cursor: pointer;
+}

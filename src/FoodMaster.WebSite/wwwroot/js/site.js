@@ -15,13 +15,13 @@ async function addToCart(element, data) {
             if (!response.ok)
                 return;
 
-            element.setAttribute("value", "Remove");
+            element.innerHTML = "Deselect";
 
             element.removeAttribute("onclick");
             element.setAttribute("onclick", `removeFromCart(this, ${JSON.stringify(data)})`);
 
-            element.classList.remove("btn-success");
-            element.classList.add("btn-danger");
+            element.classList.remove("text-success");
+            element.classList.add("text-danger");
         },
         onError: (error) => {
             console.log(error);
@@ -39,13 +39,13 @@ async function removeFromCart(element, data) {
             if (!response.ok)
                 return;
 
-            element.setAttribute("value", "Add To Cart");
+            element.innerHTML = "Select";
 
             element.removeAttribute("onclick");
             element.setAttribute("onclick", `addToCart(this, ${JSON.stringify(data)})`);
 
-            element.classList.remove("btn-danger");
-            element.classList.add("btn-success");
+            element.classList.remove("text-danger");
+            element.classList.add("text-success");
         },
         onError: (e) => {
             console.log(e);
