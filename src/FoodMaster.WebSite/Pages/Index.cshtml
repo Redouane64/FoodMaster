@@ -21,13 +21,17 @@
                     <h6 class="card-subtitle mb-2 text-muted">@Currency.AsRubles(item.Price)</h6>
                     <p class="card-text">@item.Description</p>
                     <a class="card-link" asp-area="" asp-page="Details" asp-route-id="@item.Id">See Details</a>
-                    @if (item.InCart)
+                    @if (!User.IsInRole("Admin"))
                     {
-                        <a class="card-link text-danger" onclick="removeFromCart(this,{id:@item.Id})">Deselect</a>
-                    }
-                    else
-                    {
-                        <a class="card-link text-success" onclick="addToCart(this,{id:@item.Id})">Select</a>
+
+                        @if (item.InCart)
+                        {
+                            <a class="card-link text-danger" onclick="removeFromCart(this,{id:@item.Id})">Deselect</a>
+                        }
+                        else
+                        {
+                            <a class="card-link text-success" onclick="addToCart(this,{id:@item.Id})">Select</a>
+                        }
                     }
                 </div>
             </div>

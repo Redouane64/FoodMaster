@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace FoodMaster.WebSite
 {
     [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
-    [Authorize]
+    [Authorize(Roles = "User, Guest")]
     public class CartModel : PageModel
     {
         private readonly ICartService cartService;

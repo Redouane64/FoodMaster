@@ -12,44 +12,50 @@
     var item = mapper.Map<ViewModels.Meal>(MealsService.GetById(id));
 }
 
-<div class="row">
-    <div class="col">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <img src="@item.Image" alt="@item.Name" style="width: 100%" />
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-light">
+                <h3 class="display-4  text-center">@item.Name</h3>
             </li>
-        </ul>
-    </div>
-    <div class="col-8">
-        <ul class="list-group">
+            <li class="list-group-item list-group-item-light">
+                <h5 class="display-4  text-center" style="font-size: 2em">@Currency.AsRubles(item.Price)</h5>
+            </li>
             <li class="list-group-item">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="font-weight-light">@item.Name</h3>
-                    </div>
-                    <div class="col">
-                        <h2 class="d-flex justify-content-end font-weight-bold">@Currency.AsRubles(item.Price)</h2>
-                    </div>
+                @item.Description
+            </li>
+            <li class="list-group-item">
+                <div>
+                    <h5 class="font-italic">Ingredients</h5>
+                    <ul class="list-inline">
+                        @foreach (var ingredient in item.Ingredients)
+                        {
+                            <li class="list-inline-item">@ingredient</li>
+                        }
+                    </ul>
                 </div>
             </li>
             <li class="list-group-item">
-                <p>@item.Description</p>
-            </li>
-            <li class="list-group-item">
-                <p></p>
-            </li>
-            <li class="list-group-item">
-                <div class="d-flex justify-content-end">
-                @if (item.InCart)
-                {
-                <input class="btn btn-danger" type="button" value="Remove From Cart" onclick="removeFromCart(this,{id:@item.Id})">
-                }
-                else
-                {
-                <input class="btn btn-success" type="button" value="Add To Cart" onclick="addToCart(this,{id:@item.Id})">
-                }
+                <div>
+                    <h5 class="font-italic">Calories</h5>
+                    <em>@item.Calories&nbsp;KJ per 100g.</em>
                 </div>
             </li>
+            @if (!User.IsInRole("Admin"))
+            {
+            <li class="list-group-item">
+                <div class="d-flex justify-content-center">
+                    @if (item.InCart)
+                    {
+                        <a class="display-4 text-danger" style="font-size: 2em" onclick="removeFromCart(this,{id:@item.Id})">Deselect</a>
+                    }
+                    else
+                    {
+                        <a class="display-4 text-success" style="font-size: 2em" onclick="addToCart(this,{id:@item.Id})">Select</a>
+                    }
+                </div>
+            </li>
+            }
         </ul>
     </div>
 </div>

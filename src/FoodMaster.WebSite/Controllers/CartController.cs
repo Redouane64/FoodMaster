@@ -10,7 +10,7 @@ namespace FoodMaster.WebSite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "User, Guest", AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CartController : ControllerBase
     {

@@ -20,8 +20,11 @@ namespace FoodMaster.WebSite.Domain
         [JsonPropertyName("category")]
         public int Category { get; set; }
 
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
+        [JsonPropertyName("ingredients")]
+        public IEnumerable<int> Ingredients { get; set; }
+
+        [JsonPropertyName("calories")]
+        public float Calories { get; set; }
 
     }
 }

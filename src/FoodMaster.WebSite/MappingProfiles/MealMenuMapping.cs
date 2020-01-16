@@ -12,6 +12,7 @@ namespace FoodMaster.WebSite.MappingProfiles
         public MealMenuMapping()
         {
             CreateMap<Domain.Meal, ViewModels.Meal>()
+                .ForMember(dest => dest.Ingredients, options => options.MapFrom<IngredientsValueResolver, IEnumerable<int>>(s => s.Ingredients))
                 .ForMember(dest => dest.InCart, options => options.MapFrom<ItemInCartValueResolver, bool>(m => default));
 
             CreateMap<Domain.Menu, ViewModels.Menu>()
@@ -45,6 +46,21 @@ namespace FoodMaster.WebSite.MappingProfiles
             public string Resolve(Domain.Menu source, ViewModels.Menu destination, int sourceMember, string destMember, ResolutionContext context)
             {
                 return categories.FirstOrDefault(c => c.Id == sourceMember)?.Name ?? "Uncategorized";
+            }
+        }
+
+        private class IngredientsValueResolver : IMemberValueResolver<Domain.Meal, ViewModels.Meal, IEnumerable<int>, IEnumerable<string>>
+        {
+            private readonly ICollection<Ingredient> ingredients;
+
+            public IngredientsValueResolver(ICollection<Ingredient> ingredients)
+            {
+                this.ingredients = ingredients;
+            }
+
+            public IEnumerable<string> Resolve(Domain.Meal source, ViewModels.Meal destination, IEnumerable<int> sourceMember, IEnumerable<string> destMember, ResolutionContext context)
+            {
+                return ingredients.Join<Ingredient, int, int, string>(source.Ingredients, i => i.Id, i => i, (ing, id) => ing.Name);
             }
         }
     }
