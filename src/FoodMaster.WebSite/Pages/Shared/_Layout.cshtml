@@ -22,17 +22,21 @@
                 {
                     <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/#meals">Meals</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/#desserts">Desserts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/#drinks">Drinks</a>
-                            </li>
+                            @if (User.IsInRole(Roles.Admin.ToString()))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Manage Menus</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Menus</a>
+                                </li>
+                            }
                         </ul>
                     </div>
+
                     <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse flex-sm-row-reverse">
                         <ul class="nav justify-content-end">
                             @if (User.IsInRole(Roles.Admin.ToString()))
