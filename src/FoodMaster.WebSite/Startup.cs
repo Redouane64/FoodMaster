@@ -82,6 +82,7 @@ namespace FoodMaster.WebSite
             });
 
             services.AddSingleton<WriteToDiskFilterAttribute>();
+            services.AddSingleton<IDiscountProvider, BirthdayDiscountProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

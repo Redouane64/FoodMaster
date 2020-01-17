@@ -23,12 +23,14 @@ namespace FoodMaster.WebSite
     {
         private readonly ICartService cartService;
         private readonly IOrdersService ordersService;
+        private readonly IDiscountProvider discountProvider;
         private readonly IMapper mapper;
 
-        public CartModel(ICartService cartService, IOrdersService ordersService, IMapper mapper)
+        public CartModel(ICartService cartService, IOrdersService ordersService, IDiscountProvider discountProvider, IMapper mapper)
         {
             this.cartService = cartService;
             this.ordersService = ordersService;
+            this.discountProvider = discountProvider;
             this.mapper = mapper;
         }
 
@@ -70,7 +72,7 @@ namespace FoodMaster.WebSite
 
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var orderItems = items.Select(item => new Domain.OrderItem { MealId = item.ItemId, Quantity = item.Quantity }).ToList();
-            var total = CartItems.Sum(ci => ci.Price * ci.Quantity);
+            var total = CartItems.Sum(ci => ci.Price * ci.Quantity) * (decimal)discountProvider.GetDiscount();
             cartService.Clear();
 
             var order = new Order {

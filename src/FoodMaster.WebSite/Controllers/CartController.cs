@@ -16,11 +16,13 @@ namespace FoodMaster.WebSite.Controllers
     {
         private readonly IMealsService mealsService;
         private readonly ICartService cartService;
+        private readonly IDiscountProvider discountProvider;
 
-        public CartController(IMealsService mealsService, ICartService cartService)
+        public CartController(IMealsService mealsService, ICartService cartService, IDiscountProvider discountProvider)
         {
             this.mealsService = mealsService;
             this.cartService = cartService;
+            this.discountProvider = discountProvider;
         }
 
         [HttpPost("{id:int}", Name = nameof(Create))]
@@ -53,8 +55,9 @@ namespace FoodMaster.WebSite.Controllers
             cartService.GetByItemId(id).Quantity = quantity;
 
             var total = cartService.GetCartTotal();
+            var discount = total * (decimal)discountProvider.GetDiscount();
 
-            return Ok(new { Total = Currency.AsRubles(total), TotalDiscount = Currency.AsRubles(total * 0.5m) });
+            return Ok(new { Total = Currency.AsRubles(total), TotalDiscount = Currency.AsRubles(discount) });
         }
 
         [HttpDelete("{id:int}", Name = nameof(Delete))]
