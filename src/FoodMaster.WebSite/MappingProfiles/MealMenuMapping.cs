@@ -51,16 +51,16 @@ namespace FoodMaster.WebSite.MappingProfiles
 
         private class IngredientsValueResolver : IMemberValueResolver<Domain.Meal, ViewModels.Meal, IEnumerable<int>, IEnumerable<string>>
         {
-            private readonly ICollection<Ingredient> ingredients;
+            private readonly IStockService stockService;
 
-            public IngredientsValueResolver(ICollection<Ingredient> ingredients)
+            public IngredientsValueResolver(IStockService stockService)
             {
-                this.ingredients = ingredients;
+                this.stockService = stockService;
             }
 
             public IEnumerable<string> Resolve(Domain.Meal source, ViewModels.Meal destination, IEnumerable<int> sourceMember, IEnumerable<string> destMember, ResolutionContext context)
             {
-                return ingredients.Join<Ingredient, int, int, string>(source.Ingredients, i => i.Id, i => i, (ing, id) => ing.Name);
+                return stockService.GetAll().Join<Ingredient, int, int, string>(source.Ingredients, i => i.Id, i => i, (ing, id) => ing.Name);
             }
         }
     }

@@ -55,7 +55,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
 
         IEnumerable<Meal> IRepository<Meal>.GetAll()
         {
-            return meals;
+            return meals.Where(m => stockService.Contains(m.Ingredients));
         }
 
         #endregion
