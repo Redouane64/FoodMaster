@@ -18,7 +18,7 @@ namespace FoodMaster.WebSite.Pages
         private readonly IMapper mapper;
         private readonly IMealsService mealsService;
 
-        public IEnumerable<ViewModels.Menu> Menu => mapper.Map<IEnumerable<ViewModels.Menu>>(mealsService.GetAll().GroupBy(item => item.Category, (category, items) => new Domain.Menu { Category = category, Meals = items.ToArray() }));
+        public IEnumerable<ViewModels.Menu> Menu => mapper.Map<IEnumerable<ViewModels.Menu>>(mealsService.GetPreparableMeals().GroupBy(item => item.Category, (category, items) => new Domain.Menu { Category = category, Meals = items.ToArray() }));
 
         public IndexModel(IMapper mapper, IMealsService mealsService)
         {

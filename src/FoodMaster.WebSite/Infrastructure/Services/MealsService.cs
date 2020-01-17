@@ -55,6 +55,11 @@ namespace FoodMaster.WebSite.Infrastructure.Services
 
         IEnumerable<Meal> IRepository<Meal>.GetAll()
         {
+            return meals;
+        }
+
+        public IEnumerable<Meal> GetPreparableMeals()
+        {
             return meals.Where(m => stockService.Contains(m.Ingredients));
         }
 
