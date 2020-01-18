@@ -6,8 +6,8 @@ namespace FoodMaster.WebSite.Abstraction.Services
 {
     public interface IMealsService : IRepository<Meal>
     {
-        IEnumerable<Meal> GetPreparableMeals();
-        IEnumerable<Meal> GetAllByCategoryId(int category);
+        IEnumerable<Domain.Meal> GetPreparableMeals();
+        IEnumerable<Domain.Menu> GetAllGroupedByCategory();
         bool HasItemWithId(int itemId);
         Meal GetById(int id);
     }

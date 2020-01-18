@@ -20,9 +20,13 @@ namespace FoodMaster.WebSite.Infrastructure.Services
             this._base = this as IRepository<Meal>;
         }
 
-        public IEnumerable<Meal> GetAllByCategoryId(int category)
+        public IEnumerable<Domain.Menu> GetAllGroupedByCategory()
         {
-            return meals.Where(meal => meal.Category == category);
+            return this.GetPreparableMeals()
+                        .GroupBy(
+                            item => item.Category, 
+                            (category, items) => new Domain.Menu { Category = category, Meals = items.ToArray() }
+                        );
         }
 
         public bool HasItemWithId(int itemId)
@@ -30,7 +34,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
             return meals.Any(item => item.Id == itemId);
         }
 
-        public Meal GetById(int id)
+        public Domain.Meal GetById(int id)
         {
             return _base.Get(meal => meal.Id == id);
         }
@@ -38,27 +42,27 @@ namespace FoodMaster.WebSite.Infrastructure.Services
 
         #region IRepository explicit implementation
 
-        void IRepository<Meal>.Create(Meal item)
+        void IRepository<Domain.Meal>.Create(Meal item)
         {
             meals.Add(item);
         }
 
-        void IRepository<Meal>.Delete(Meal item)
+        void IRepository<Domain.Meal>.Delete(Meal item)
         {
             meals.Remove(item);
         }
 
-        Meal IRepository<Meal>.Get(Func<Meal, bool> predicate)
+        Meal IRepository<Domain.Meal>.Get(Func<Domain.Meal, bool> predicate)
         {
             return meals.FirstOrDefault(predicate);
         }
 
-        IEnumerable<Meal> IRepository<Meal>.GetAll()
+        IEnumerable<Domain.Meal> IRepository<Domain.Meal>.GetAll()
         {
             return meals;
         }
 
-        public IEnumerable<Meal> GetPreparableMeals()
+        public IEnumerable<Domain.Meal> GetPreparableMeals()
         {
             return meals.Where(m => stockService.Contains(m.Ingredients));
         }
