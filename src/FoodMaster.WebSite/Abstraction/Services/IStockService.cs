@@ -7,5 +7,6 @@ namespace FoodMaster.WebSite.Abstraction.Services
     public interface IStockService : IRepository<Ingredient>
     {
         bool Contains(IEnumerable<int> ingredients);
+        bool Contains(IEnumerable<string> ingredients);
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
 
 using Microsoft.AspNetCore.Authentication;
@@ -26,6 +27,7 @@ namespace FoodMaster.WebSite
         [BindProperty]
         public UserDetails UserDetails { get; set; }
 
+        [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
         public async Task<IActionResult> OnPostAsync()
         {
             if(!ModelState.IsValid)

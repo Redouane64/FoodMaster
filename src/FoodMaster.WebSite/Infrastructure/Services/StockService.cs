@@ -20,6 +20,11 @@ namespace FoodMaster.WebSite.Infrastructure.Services
             return ingredients.All(id => this.ingredients.Any(ing => ing.Id == id && ing.Quantity > 0));
         }
 
+        public bool Contains(IEnumerable<string> ingredients)
+        {
+            return ingredients.All(name => this.ingredients.Any(ing => ing.Name.Equals(name.Trim().ToLower(), StringComparison.OrdinalIgnoreCase)));
+        }
+
         public void Create(Ingredient item)
         {
 
