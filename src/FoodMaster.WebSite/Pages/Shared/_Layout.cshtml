@@ -25,13 +25,13 @@
                             @if (User.IsInRole(Roles.Admin.ToString()))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">Manage Menus</a>
+                                    <a class="nav-link" asp-area="Admin" asp-page="Menus">Menus</a>
                                 </li>
                             }
                             else
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">Menus</a>
+                                    <a class="nav-link" asp-asp-area="" asp-page="Index">Menus</a>
                                 </li>
                             }
                         </ul>

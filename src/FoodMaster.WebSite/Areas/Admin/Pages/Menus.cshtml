@@ -1,0 +1,55 @@
+﻿@page
+
+@model FoodMaster.WebSite.MenusModel
+
+@{
+    ViewData["Title"] = "Menus";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h3>Menus</h3>
+
+<br />
+
+<div class="row">
+    <div class="col">
+        <table class="table table-sm table-hover">
+            <thead>
+                <th colspan="3">
+                    <a name="create" id="create" class="btn btn-outline-success" asp-area="Admin" asp-page="Create" role="button">Create New</a>
+                </th>
+            </thead>
+            <tbody>
+                @foreach (var menu in Model.Menus)
+                {                   
+                    <tr>
+                        <td class="bg-white font-weight-light font-italic text-dark" scope="row" colspan="3">
+                            @menu.Category
+                        </td>
+                    </tr>
+                    foreach (var item in menu.Meals)
+                    {
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td scope="row">
+                                <a name="item" id="item" class="text-primary align-middle" asp-area="" asp-page="Details" asp-route-id="@item.Id" role="button">
+                                    @item.Name
+                                </a>
+                            </td>
+                            <td>
+                                <form class="form-inline" method="post">
+                                    <div class="form-group">
+                                        <input type="hidden" name="itemId" value="@item.Id">
+                                        <input name="delete" id="delete" class="btn btn-sm btn-danger" type="submit" value="Delete">
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
