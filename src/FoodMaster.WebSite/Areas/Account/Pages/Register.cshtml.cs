@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
 {
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class RegisterModel : PageModel
     {
         private readonly IUsersService usersService;
@@ -27,7 +28,6 @@ namespace FoodMaster.WebSite
         [BindProperty]
         public UserDetails UserDetails { get; set; }
 
-        [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
         public async Task<IActionResult> OnPostAsync()
         {
             if(!ModelState.IsValid)

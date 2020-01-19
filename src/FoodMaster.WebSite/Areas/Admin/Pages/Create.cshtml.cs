@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace FoodMaster.WebSite
 {
     [Authorize(Roles = "Admin")]
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class CreateModel : PageModel
     {
         private readonly IMealsService mealsService;
@@ -31,7 +32,6 @@ namespace FoodMaster.WebSite
 
         public IEnumerable<Ingredient> Ingredients { get => stockService.GetAll(); }
 
-        [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
         public IActionResult OnPost()
         {
             if(!ModelState.IsValid)

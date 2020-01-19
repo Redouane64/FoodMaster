@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace FoodMaster.WebSite
 {
     [Authorize(Roles = "Admin")]
+    [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class MenusModel : PageModel
     {
         private readonly IMealsService mealsService;
@@ -26,7 +27,6 @@ namespace FoodMaster.WebSite
 
         public IEnumerable<Menu> Menus => mapper.Map<IEnumerable<Menu>>(mealsService.GetAllGroupedByCategory());
 
-        [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
         public IActionResult OnPost([FromForm]int itemId)
         {
             var meal = mealsService.GetById(itemId);
