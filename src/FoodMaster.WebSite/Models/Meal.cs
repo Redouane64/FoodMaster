@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,8 +18,7 @@ namespace FoodMaster.WebSite.Models
         public string Description { get; set; }
 
         [Required]
-        [DataType(DataType.MultilineText)]
-        public string Ingredients { get; set; }
+        public IEnumerable<int> Ingredients { get; set; }
 
         [Required()]
         [Range(1, 9999)]

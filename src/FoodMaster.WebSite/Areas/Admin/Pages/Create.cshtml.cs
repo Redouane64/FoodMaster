@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Domain;
 using FoodMaster.WebSite.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,8 @@ namespace FoodMaster.WebSite
         [BindProperty]
         public Models.Meal Meal { get; set; }
 
+        public IEnumerable<Ingredient> Ingredients { get => stockService.GetAll(); }
+
         [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
         public IActionResult OnPost()
         {
@@ -36,8 +39,7 @@ namespace FoodMaster.WebSite
                 return Page();
             }
 
-            var ingredients = Meal.Ingredients.Split(',');
-            if(!stockService.Contains(ingredients))
+            if(!stockService.Contains(Meal.Ingredients))
             {
                 ModelState.AddModelError("Invalid Ingredients", "One or more ingredient name is not valid.");
                 return Page();
