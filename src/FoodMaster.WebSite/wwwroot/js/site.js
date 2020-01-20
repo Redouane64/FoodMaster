@@ -65,10 +65,10 @@ async function updateItemQuantity(element, data) {
                 return;
             }
 
-            var totalPriceElement = document.getElementById("totalPriceText");
-            var totalDiscountPriceElement = document.getElementById("totalDiscountPriceText");
+            let totalPriceElement = document.getElementById("totalPriceText");
+            let totalDiscountPriceElement = document.getElementById("totalDiscountPriceText");
 
-            var responseAsJson = await response.json();
+            let responseAsJson = await response.json();
 
             totalPriceElement.innerHTML = responseAsJson.total;
             totalDiscountPriceElement.innerHTML = responseAsJson.totalDiscount;
@@ -87,7 +87,7 @@ function runCartRequest(url, method, data) {
 }
 
 function confirmOrder(checkBox) {
-    var sendOrderButton = document.getElementById("sendOrder");
+    let sendOrderButton = document.getElementById("sendOrder");
     sendOrderButton.classList.toggle("disabled");
     
     if (checkBox.checked) sendOrderButton.disabled = "";
