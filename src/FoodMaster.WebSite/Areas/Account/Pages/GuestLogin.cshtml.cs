@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Commands;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Events;
 using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
 using MediatR;
@@ -20,12 +21,10 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
     [BindProperties]
     public class GuestLoginModel : PageModel
     {
-        private readonly IUsersService usersService;
         private readonly IMediator mediator;
 
-        public GuestLoginModel(IUsersService usersService, IMediator mediator)
+        public GuestLoginModel(IMediator mediator)
         {
-            this.usersService = usersService;
             this.mediator = mediator;
         }
 
@@ -40,7 +39,6 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
             }
 
             var claims = await mediator.Send(GuestCredentials);
-
             await HttpContext.SignInAsync(
                 new ClaimsPrincipal(
                     new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
@@ -56,13 +54,7 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
                 return Unauthorized();
             }
 
-            var user = usersService.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (user.Role.Equals(Roles.Guest.ToString()))
-            {
-                usersService.Delete(user);
-            }
-
+            await mediator.Publish(new SignOutNotification(User.FindFirst(ClaimTypes.NameIdentifier).Value));
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToPage();
