@@ -4,10 +4,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Commands;
 using FoodMaster.WebSite.Domain;
 using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Models;
-
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,12 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
     public class GuestLoginModel : PageModel
     {
         private readonly IUsersService usersService;
+        private readonly IMediator mediator;
 
-        public GuestLoginModel(IUsersService usersService)
+        public GuestLoginModel(IUsersService usersService, IMediator mediator)
         {
             this.usersService = usersService;
+            this.mediator = mediator;
         }
 
         public GuestCredentials GuestCredentials { get; set; }
@@ -36,28 +39,7 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
                 return Page();
             }
 
-            var userId = Guid.NewGuid().ToString();
-            var assignedRole = Roles.Guest.ToString();
-
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, GuestCredentials.FullName),
-                new Claim(ClaimTypes.DateOfBirth, GuestCredentials.BirthDate.ToString()),
-                new Claim(ClaimTypes.Role, assignedRole)
-            };
-
-            var user = new User
-            {
-                Id = userId,
-                UserName = userId,
-                FullName = GuestCredentials.FullName,
-                BirthDate = GuestCredentials.BirthDate,
-                Claims = new List<Claim>(claims),
-                Role = assignedRole
-            };
-            
-            usersService.Create(user);
+            var claims = await mediator.Send(GuestCredentials);
 
             await HttpContext.SignInAsync(
                 new ClaimsPrincipal(
