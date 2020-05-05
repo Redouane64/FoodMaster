@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Models;
-
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +13,11 @@ namespace FoodMaster.WebSite
 {
     public class UserLoginModel : PageModel
     {
+        private readonly IMediator mediator;
 
-        private readonly IUsersService usersService;
-
-        public UserLoginModel(IUsersService usersService)
+        public UserLoginModel(IMediator mediator)
         {
-            this.usersService = usersService;
+            this.mediator = mediator;
         }
 
         [BindProperty]
@@ -31,26 +30,13 @@ namespace FoodMaster.WebSite
                 return Page();
             }
 
-            var user = usersService.FindByUserName(LoginCredentials.UserName);
+            var claims = await mediator.Send(LoginCredentials);
 
-            if (user is null)
+            if (claims is null)
             {
                 ModelState.AddModelError("Invalid Credentials", "Invalid credentials.");
                 return Page();
             }
-
-            if (!usersService.VerifyPassword(user, LoginCredentials.Password))
-            {
-                ModelState.AddModelError("Invalid Credentials", "Invalid credentials.");
-                return Page();
-            }
-
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.FullName),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
 
             await HttpContext.SignInAsync(
                 new ClaimsPrincipal(
