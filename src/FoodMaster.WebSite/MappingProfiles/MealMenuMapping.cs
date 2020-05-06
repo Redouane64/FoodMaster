@@ -4,6 +4,7 @@ using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Queries.GetMenus;
 
 namespace FoodMaster.WebSite.MappingProfiles
 {
@@ -15,7 +16,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 .ForMember(dest => dest.Ingredients, options => options.MapFrom<IngredientsValueResolver, IEnumerable<int>>(s => s.Ingredients))
                 .ForMember(dest => dest.InCart, options => options.MapFrom<ItemInCartValueResolver, bool>(m => default));
 
-            CreateMap<Domain.Menu, ViewModels.Menu>()
+            CreateMap<Domain.Menu, MenuViewModel>()
                 .ForMember(dest => dest.Category, options => options.MapFrom<CategoryNameValueResolver, int>(s => s.Category));
         }
 
@@ -34,7 +35,7 @@ namespace FoodMaster.WebSite.MappingProfiles
             }
         }
 
-        private class CategoryNameValueResolver : IMemberValueResolver<Domain.Menu, ViewModels.Menu, int, string>
+        private class CategoryNameValueResolver : IMemberValueResolver<Domain.Menu, MenuViewModel, int, string>
         {
             private readonly ICollection<Category> categories;
 
@@ -43,7 +44,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 this.categories = categories;
             }
 
-            public string Resolve(Domain.Menu source, ViewModels.Menu destination, int sourceMember, string destMember, ResolutionContext context)
+            public string Resolve(Domain.Menu source, MenuViewModel destination, int sourceMember, string destMember, ResolutionContext context)
             {
                 return categories.FirstOrDefault(c => c.Id == sourceMember)?.Name ?? "Uncategorized";
             }

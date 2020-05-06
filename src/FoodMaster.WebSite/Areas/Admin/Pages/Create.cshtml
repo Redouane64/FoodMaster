@@ -2,8 +2,6 @@
 
 @model FoodMaster.WebSite.CreateModel
 
-@inject ICollection<FoodMaster.WebSite.Domain.Category> Categories
-
 @{
     ViewData["Title"] = "Menus";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -22,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label" asp-for="@Model.Meal.Category"></label>
-                <select class="form-control" asp-for="@Model.Meal.Category" asp-items="@Categories.Select(c => new SelectListItem(c.Name, c.Name)).ToArray()">
+                <select class="form-control" asp-for="@Model.Meal.Category" asp-items="@Model.Categories.Select(c => new SelectListItem(c.Name, c.Name)).ToArray()">
                 </select>
                 <small class="text-danger"><span asp-validation-for="@Model.Meal.Category"></span></small>
             </div>
