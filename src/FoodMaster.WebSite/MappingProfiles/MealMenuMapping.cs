@@ -4,6 +4,7 @@ using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Queries.Common;
 using FoodMaster.WebSite.Queries.GetMenus;
 
 namespace FoodMaster.WebSite.MappingProfiles
@@ -12,7 +13,7 @@ namespace FoodMaster.WebSite.MappingProfiles
     {
         public MealMenuMapping()
         {
-            CreateMap<Domain.Meal, ViewModels.Meal>()
+            CreateMap<Domain.Meal, MealViewModel>()
                 .ForMember(dest => dest.Ingredients, options => options.MapFrom<IngredientsValueResolver, IEnumerable<int>>(s => s.Ingredients))
                 .ForMember(dest => dest.InCart, options => options.MapFrom<ItemInCartValueResolver, bool>(m => default));
 
@@ -20,7 +21,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 .ForMember(dest => dest.Category, options => options.MapFrom<CategoryNameValueResolver, int>(s => s.Category));
         }
 
-        private class ItemInCartValueResolver : IMemberValueResolver<Domain.Meal, ViewModels.Meal, bool, bool>
+        private class ItemInCartValueResolver : IMemberValueResolver<Domain.Meal, MealViewModel, bool, bool>
         {
             private readonly ICartService cartService;
 
@@ -29,7 +30,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 this.cartService = cartService;
             }
 
-            public bool Resolve(Domain.Meal source, ViewModels.Meal destination, bool sourceMember, bool destMember, ResolutionContext context)
+            public bool Resolve(Domain.Meal source, MealViewModel destination, bool sourceMember, bool destMember, ResolutionContext context)
             {
                 return cartService.HasItemWithId(source.Id);
             }
@@ -50,7 +51,7 @@ namespace FoodMaster.WebSite.MappingProfiles
             }
         }
 
-        private class IngredientsValueResolver : IMemberValueResolver<Domain.Meal, ViewModels.Meal, IEnumerable<int>, IEnumerable<string>>
+        private class IngredientsValueResolver : IMemberValueResolver<Domain.Meal, MealViewModel, IEnumerable<int>, IEnumerable<string>>
         {
             private readonly IStockService stockService;
 
@@ -59,7 +60,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 this.stockService = stockService;
             }
 
-            public IEnumerable<string> Resolve(Domain.Meal source, ViewModels.Meal destination, IEnumerable<int> sourceMember, IEnumerable<string> destMember, ResolutionContext context)
+            public IEnumerable<string> Resolve(Domain.Meal source, MealViewModel destination, IEnumerable<int> sourceMember, IEnumerable<string> destMember, ResolutionContext context)
             {
                 return stockService.GetAll().Join<Ingredient, int, int, string>(source.Ingredients, i => i.Id, i => i, (ing, id) => ing.Name);
             }

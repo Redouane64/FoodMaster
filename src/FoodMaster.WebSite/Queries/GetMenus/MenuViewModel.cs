@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-
-using FoodMaster.WebSite.ViewModels;
-
+using FoodMaster.WebSite.Queries.Common;
 using MediatR;
 
 namespace FoodMaster.WebSite.Queries.GetMenus
@@ -9,6 +7,6 @@ namespace FoodMaster.WebSite.Queries.GetMenus
     public class MenuViewModel : IRequest
     {
         public string Category { get; set; }
-        public IEnumerable<Meal> Meals { get; set; }
+        public IEnumerable<MealViewModel> Meals { get; set; }
     }
 }

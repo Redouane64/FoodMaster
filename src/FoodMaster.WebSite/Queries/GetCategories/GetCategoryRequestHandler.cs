@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace FoodMaster.WebSite.Queries.GetCategories
 
         public Task<CategoryViewModel[]> Handle(GetCategoriesRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(categories.Select(c => new CategoryViewModel { Name = c.Name });
+            return Task.FromResult(categories.Select(c => new CategoryViewModel { Name = c.Name }).ToArray());
         }
     }
 }
