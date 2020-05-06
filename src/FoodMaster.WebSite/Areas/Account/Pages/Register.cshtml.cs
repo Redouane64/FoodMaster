@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-
+using FoodMaster.WebSite.Commands.RegisterUser;
 using FoodMaster.WebSite.Filters;
-using FoodMaster.WebSite.Models;
 
 using MediatR;
 

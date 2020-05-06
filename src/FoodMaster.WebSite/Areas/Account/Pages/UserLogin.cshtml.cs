@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using FoodMaster.WebSite.Abstraction.Services;
-using FoodMaster.WebSite.Models;
+using FoodMaster.WebSite.Commands.LoginUser;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;

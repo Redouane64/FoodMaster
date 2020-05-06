@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 using FoodMaster.WebSite.Abstraction.Services;
 using FoodMaster.WebSite.Commands;
+using FoodMaster.WebSite.Commands.LoginGuest;
 using FoodMaster.WebSite.Domain;
 using FoodMaster.WebSite.Events;
 using FoodMaster.WebSite.Filters;
-using FoodMaster.WebSite.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;

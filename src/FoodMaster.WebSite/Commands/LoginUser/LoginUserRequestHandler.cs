@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+
 using FoodMaster.WebSite.Abstraction.Services;
-using FoodMaster.WebSite.Models;
 using MediatR;
 
-namespace FoodMaster.WebSite.Commands
+namespace FoodMaster.WebSite.Commands.LoginUser
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginCredentials, Claim[]>
+    public class LoginUserRequestHandler : IRequestHandler<LoginCredentials, Claim[]>
     {
         private readonly IUsersService usersService;
 
-        public LoginUserCommandHandler(IUsersService usersService)
+        public LoginUserRequestHandler(IUsersService usersService)
         {
             this.usersService = usersService;
         }
@@ -24,7 +21,7 @@ namespace FoodMaster.WebSite.Commands
             var user = usersService.FindByUserName(request.UserName);
             var validPassword = usersService.VerifyPassword(user, request.Password);
 
-            if(user is null || !validPassword)
+            if (user is null || !validPassword)
             {
                 return null;
             }

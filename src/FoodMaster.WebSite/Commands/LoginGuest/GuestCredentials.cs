@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 using MediatR;
 
-namespace FoodMaster.WebSite.Models
+namespace FoodMaster.WebSite.Commands.LoginGuest
 {
     public class GuestCredentials : IRequest<Claim[]>
     {
