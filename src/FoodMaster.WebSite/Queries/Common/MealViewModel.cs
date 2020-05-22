@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace FoodMaster.WebSite.ViewModels
+namespace FoodMaster.WebSite.Queries.Common
 {
-    public class Meal
+    public class MealViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

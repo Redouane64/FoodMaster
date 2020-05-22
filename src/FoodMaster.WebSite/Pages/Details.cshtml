@@ -1,7 +1,6 @@
 ﻿@page "{id:int}"
 
-@inject IMealsService MealsService
-@inject IMapper mapper;
+@inject MediatR.IMediator Mediator
 
 @{
     ViewData["Title"] = "Details";
@@ -9,7 +8,12 @@
 
 @{
     var id = int.Parse(RouteData.Values["id"].ToString());
-    var item = mapper.Map<ViewModels.Meal>(MealsService.GetById(id));
+    var item = await Mediator.Send(new FoodMaster.WebSite.Queries.GetMealDetails.GetMealDetailsRequest { MealId = id });
+
+    if(item is null)
+    {
+        RedirectToPage("NotFound");
+    }
 }
 
 <div class="row justify-content-center">

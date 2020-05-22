@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using FoodMaster.WebSite.Domain;
 
-namespace FoodMaster.WebSite.ViewModels
+namespace FoodMaster.WebSite.Queries.Common
 {
     public class Order
     {

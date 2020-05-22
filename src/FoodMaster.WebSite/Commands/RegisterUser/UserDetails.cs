@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
-namespace FoodMaster.WebSite.Models
+using MediatR;
+
+namespace FoodMaster.WebSite.Commands.RegisterUser
 {
-    public class UserDetails
+    public class UserDetails : IRequest<Claim[]>
     {
         [Required]
         [DataType(DataType.Text)]

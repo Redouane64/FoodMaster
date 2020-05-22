@@ -1,4 +1,4 @@
-﻿namespace FoodMaster.WebSite.ViewModels
+﻿namespace FoodMaster.WebSite.Queries.Common
 {
     public class OrderItem
     {
