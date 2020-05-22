@@ -1,17 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodMaster.WebSite.Domain
 {
     public class Ingredient
     {
-        [JsonPropertyName("id")]
+        [Column("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("name")]
+        [Column("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("quantity")]
+        [Column("quantity")]
         public int Quantity { get; set; }
+
+        public ICollection<MealIngredient> Meals { get; set; }
 
     }
 }

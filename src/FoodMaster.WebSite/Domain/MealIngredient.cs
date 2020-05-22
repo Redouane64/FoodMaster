@@ -2,16 +2,14 @@
 
 namespace FoodMaster.WebSite.Domain
 {
-    public class OrderItem
+    public class MealIngredient
     {
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("meal_id")]
         public int MealId { get; set; }
         public Meal Meal { get; set; }
 
-        [Column("quantity")]
-        public int Quantity { get; set; }
+        [Column("ingredient_id")]
+        public int IngredientId { get; set; }
+        public Ingredient Ingredient { get; set; }
     }
 }
