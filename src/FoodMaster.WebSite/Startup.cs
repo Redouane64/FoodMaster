@@ -15,9 +15,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace FoodMaster.WebSite
 {
@@ -85,6 +87,11 @@ namespace FoodMaster.WebSite
 
             services.AddSingleton<WriteToDiskFilterAttribute>();
             services.AddSingleton<IDiscountProvider, BirthdayDiscountProvider>();
+
+            services.AddDbContext<FoodMasterDataContext>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("Default"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
