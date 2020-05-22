@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace FoodMaster.WebSite.Models
+using MediatR;
+
+namespace FoodMaster.WebSite.Commands.CreateMeal
 {
-    public class Meal
+    public class Meal : IRequest
     {
         [Required]
         public string Name { get; set; }

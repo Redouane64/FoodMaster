@@ -10,7 +10,7 @@ using FoodMaster.WebSite.Data;
 using FoodMaster.WebSite.Domain;
 using FoodMaster.WebSite.Filters;
 using FoodMaster.WebSite.Infrastructure.Services;
-
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +35,8 @@ namespace FoodMaster.WebSite
         {
             services.AddRazorPages();
             services.AddControllers();
+
+            services.AddMediatR(typeof(Startup));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options => {

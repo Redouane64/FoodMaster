@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
-namespace FoodMaster.WebSite.Models
+using MediatR;
+
+namespace FoodMaster.WebSite.Commands.LoginUser
 {
-    public class LoginCredentials
+    public class LoginCredentials : IRequest<Claim[]>
     {
         [Required]
         [Display(Name = "Username")]
