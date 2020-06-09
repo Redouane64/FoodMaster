@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using FoodMaster.WebSite.Abstraction.Services;
-using FoodMaster.WebSite.Domain;
+
+using FoodMaster.WebSite.Queries.Common;
+using FoodMaster.WebSite.Queries.GetOrders;
+
+using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FoodMaster.WebSite
@@ -14,15 +14,18 @@ namespace FoodMaster.WebSite
     [Authorize(Roles = "Admin")]
     public class OrdersModel : PageModel
     {
-        private readonly IOrdersService ordersService;
-        private readonly IMapper mapper;
+        private readonly IMediator mediator;
 
-        public OrdersModel(IOrdersService ordersService, IMapper mapper)
+        public OrdersModel(IMediator mediator)
         {
-            this.ordersService = ordersService;
-            this.mapper = mapper;
+            this.mediator = mediator;
         }
 
-        public IEnumerable<ViewModels.Order> Orders { get => mapper.Map<IEnumerable<ViewModels.Order>>(ordersService.GetAll()); }
+        public IEnumerable<Order> Orders { get; set; }
+
+        public async Task OnGet()
+        {
+            Orders = await mediator.Send(new GetOrdersRequest());
+        }
     }
 }

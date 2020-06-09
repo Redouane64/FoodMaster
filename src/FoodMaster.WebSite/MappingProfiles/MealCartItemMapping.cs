@@ -10,7 +10,7 @@ namespace FoodMaster.WebSite.MappingProfiles
         public MealCartItemMapping()
         {
             CreateMap<Domain.CartItem, ViewModels.CartItem>()
-                .ForMember(dest => dest.Item, options => options.MapFrom<MealMemberValueResolver, int>(item => item.ItemId))
+                .ForMember(dest => dest.Item, options => options.MapFrom<MealMemberValueResolver, int>(item => item.MealId))
                 .ForMember(dest => dest.Quantity, options => options.MapFrom(item => item.Quantity))
                 .ForMember(dest => dest.Price, options => options.MapFrom<PriceMemberValueResilver, Meal>(item => default));
         }
@@ -26,7 +26,7 @@ namespace FoodMaster.WebSite.MappingProfiles
 
             public Domain.Meal Resolve(Domain.CartItem source, ViewModels.CartItem destination, int sourceMember, Domain.Meal destMember, ResolutionContext context)
             {
-                return mealsService.Get(item => item.Id == source.ItemId);
+                return mealsService.Get(item => item.Id == source.MealId);
             }
         }
 
@@ -41,7 +41,7 @@ namespace FoodMaster.WebSite.MappingProfiles
 
             public decimal Resolve(Domain.CartItem source, ViewModels.CartItem destination, Meal sourceMember, decimal destMember, ResolutionContext context)
             {
-                return mealsService.Get(item => item.Id == source.ItemId).Price;
+                return mealsService.Get(item => item.Id == source.MealId).Price;
             }
         }
     }

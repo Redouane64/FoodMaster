@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodMaster.WebSite.Domain
 {
     public class User
     {
-        public string Id { get; set; }
+        [Column("id")]
+        public int Id { get; set; }
 
+        [Column("username")]
         public string UserName { get; set; }
 
+        [Column("full_name")]
         public string FullName { get; set; }
 
+        [Column("birth_date")]
         public DateTime BirthDate { get; set; }
 
+        [Column("password_hash")]
         public string PasswordHash { get; set; }
 
-        [JsonIgnore]
-        public ICollection<Claim> Claims { get; set; }
-
-        public string Role { get; set; }
+        public ICollection<UserClaim> Claims { get; set; }
+        public ICollection<UserRole> Roles { get; set; }
 
     }
 }

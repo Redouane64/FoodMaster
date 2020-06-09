@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
-using AutoMapper;
+using FoodMaster.WebSite.Queries.GetMenus;
 
-using FoodMaster.WebSite.Abstraction.Services;
+using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,19 +15,18 @@ namespace FoodMaster.WebSite.Pages
     [ResponseCache(NoStore = true)]
     public class IndexModel : PageModel
     {
-        private readonly IMapper mapper;
-        private readonly IMealsService mealsService;
+        private readonly IMediator mediator;
 
-        public IEnumerable<ViewModels.Menu> Menu => mapper.Map<IEnumerable<ViewModels.Menu>>(mealsService.GetAllGroupedByCategory());
+        public IEnumerable<MenuViewModel> Menu { get; set; }
 
-        public IndexModel(IMapper mapper, IMealsService mealsService)
+        public IndexModel(IMediator mediator)
         {
-            this.mapper = mapper;
-            this.mealsService = mealsService;
+            this.mediator = mediator;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
+            Menu = await mediator.Send(new GetMenusRequest());
         }
     }
 }

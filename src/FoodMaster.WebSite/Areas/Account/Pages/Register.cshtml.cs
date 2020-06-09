@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
-
-using FoodMaster.WebSite.Abstraction.Services;
-using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Commands.RegisterUser;
 using FoodMaster.WebSite.Filters;
-using FoodMaster.WebSite.Models;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,11 +15,11 @@ namespace FoodMaster.WebSite
     [ServiceFilter(typeof(WriteToDiskFilterAttribute))]
     public class RegisterModel : PageModel
     {
-        private readonly IUsersService usersService;
+        private readonly IMediator mediator;
 
-        public RegisterModel(IUsersService usersService)
+        public RegisterModel(IMediator mediator)
         {
-            this.usersService = usersService;
+            this.mediator = mediator;
         }
 
         [BindProperty]
@@ -32,30 +29,16 @@ namespace FoodMaster.WebSite
         {
             if(!ModelState.IsValid)
             {
+                if (ModelState.ContainsKey("UserDetails.BirthDate"))
+                {
+                    ModelState.Remove("UserDetails.BirthDate");
+                    ModelState.AddModelError("UserDetails.BirthDate", "Invalid date.");
+                }
+
                 return Page();
             }
 
-            var userId = Guid.NewGuid().ToString();
-            var assignedRole = Roles.User.ToString();
-
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, UserDetails.FullName),
-                new Claim(ClaimTypes.Role, assignedRole)
-            };
-
-            var user = new User
-            {
-                Id = userId,
-                UserName = UserDetails.UserName,
-                FullName = UserDetails.FullName,
-                BirthDate = UserDetails.BirthDate,
-                Claims = new List<Claim>(claims),
-                Role = assignedRole
-            };
-
-            usersService.Create(user, UserDetails.Password);
+            var claims = await mediator.Send(UserDetails);
 
             await HttpContext.SignInAsync(
                 new ClaimsPrincipal(

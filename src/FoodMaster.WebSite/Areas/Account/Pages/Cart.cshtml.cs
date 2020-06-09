@@ -71,7 +71,7 @@ namespace FoodMaster.WebSite
             }
 
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var orderItems = items.Select(item => new Domain.OrderItem { MealId = item.ItemId, Quantity = item.Quantity }).ToList();
+            var orderItems = items.Select(item => new Domain.OrderItem { MealId = item.MealId, Quantity = item.Quantity }).ToList();
             var total = CartItems.Sum(ci => ci.Price * ci.Quantity) * (decimal)discountProvider.GetDiscount();
             cartService.Clear();
 

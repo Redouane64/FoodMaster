@@ -4,10 +4,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Commands;
+using FoodMaster.WebSite.Commands.LoginGuest;
 using FoodMaster.WebSite.Domain;
+using FoodMaster.WebSite.Events;
 using FoodMaster.WebSite.Filters;
-using FoodMaster.WebSite.Models;
-
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +21,11 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
     [BindProperties]
     public class GuestLoginModel : PageModel
     {
-        private readonly IUsersService usersService;
+        private readonly IMediator mediator;
 
-        public GuestLoginModel(IUsersService usersService)
+        public GuestLoginModel(IMediator mediator)
         {
-            this.usersService = usersService;
+            this.mediator = mediator;
         }
 
         public GuestCredentials GuestCredentials { get; set; }
@@ -33,32 +35,16 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
         {
             if(!ModelState.IsValid)
             {
+                if(ModelState.ContainsKey("GuestCredentials.BirthDate"))
+                {
+                    ModelState.Remove("GuestCredentials.BirthDate");
+                    ModelState.AddModelError("GuestCredentials.BirthDate", "Invalid date.");
+                }
+
                 return Page();
             }
 
-            var userId = Guid.NewGuid().ToString();
-            var assignedRole = Roles.Guest.ToString();
-
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, GuestCredentials.FullName),
-                new Claim(ClaimTypes.DateOfBirth, GuestCredentials.BirthDate.ToString()),
-                new Claim(ClaimTypes.Role, assignedRole)
-            };
-
-            var user = new User
-            {
-                Id = userId,
-                UserName = userId,
-                FullName = GuestCredentials.FullName,
-                BirthDate = GuestCredentials.BirthDate,
-                Claims = new List<Claim>(claims),
-                Role = assignedRole
-            };
-            
-            usersService.Create(user);
-
+            var claims = await mediator.Send(GuestCredentials);
             await HttpContext.SignInAsync(
                 new ClaimsPrincipal(
                     new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
@@ -74,13 +60,7 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
                 return Unauthorized();
             }
 
-            var user = usersService.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (user.Role.Equals(Roles.Guest.ToString()))
-            {
-                usersService.Delete(user);
-            }
-
+            await mediator.Publish(new SignOutNotification(User.FindFirst(ClaimTypes.NameIdentifier).Value));
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToPage();
