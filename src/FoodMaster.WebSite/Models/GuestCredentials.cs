@@ -11,7 +11,7 @@ namespace FoodMaster.WebSite.Models
         public string FullName { get; set; }
 
         [Required]
-        [DataType(DataType.Date, ErrorMessage = "Invalid date value")]
+        [DataType(DataType.Date)]
         [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
     }

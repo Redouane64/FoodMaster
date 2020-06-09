@@ -32,9 +32,6 @@
                     <input class="form-control form-control-sm" asp-for="@Model.GuestCredentials.BirthDate" placeholder="your birth date">
                     <small class="text-danger"><span asp-validation-for="@Model.GuestCredentials.BirthDate"></span></small>
                 </div>
-                <div class="form-group">
-                    <div class="text-danger font-italic" asp-validation-summary="All"></div>
-                </div>
                 <div class="form-group d-flex justify-content-center">
                     <input class="btn btn-success" type="submit" value="Proceed as Guest" />
                 </div>
