@@ -12,7 +12,7 @@ namespace FoodMaster.WebSite
         public MealMapping()
         {
             CreateMap<Commands.CreateMeal.Meal, Domain.Meal>()
-                .ForMember(dest => dest.Category,
+                .ForMember(dest => dest.CategoryId,
                     options => options.MapFrom<CategoryIdValueResolver, string>(s => s.Category));
         }
 

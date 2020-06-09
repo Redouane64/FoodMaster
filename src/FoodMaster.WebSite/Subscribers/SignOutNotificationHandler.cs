@@ -19,7 +19,7 @@ namespace FoodMaster.WebSite.Subscribers
         {
             var user = usersService.Get(u => u.Id == notification.UserId);
 
-            if(user.Role == Roles.Guest.ToString())
+            if(user.Role == Role.Guest.ToString())
             {
                 usersService.Delete(user);
             }

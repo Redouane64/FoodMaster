@@ -13,11 +13,11 @@ namespace FoodMaster.WebSite.MappingProfiles
     {
         public MealMenuMapping()
         {
-            CreateMap<Domain.Meal, MealViewModel>()
+            CreateMap<Meal, MealViewModel>()
                 .ForMember(dest => dest.Ingredients, options => options.MapFrom<IngredientsValueResolver, IEnumerable<int>>(s => s.Ingredients))
                 .ForMember(dest => dest.InCart, options => options.MapFrom<ItemInCartValueResolver, bool>(m => default));
 
-            CreateMap<Domain.Menu, MenuViewModel>()
+            CreateMap<Menu, MenuViewModel>()
                 .ForMember(dest => dest.Category, options => options.MapFrom<CategoryNameValueResolver, int>(s => s.Category));
         }
 

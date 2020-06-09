@@ -23,7 +23,7 @@ namespace FoodMaster.WebSite.Commands.RegisterUser
         public async Task<Claim[]> Handle(UserDetails request, CancellationToken cancellationToken)
         {
             var userId = Guid.NewGuid().ToString();
-            var assignedRole = Roles.User.ToString();
+            var assignedRole = Role.User.ToString();
 
             var claims = new Claim[]
             {

@@ -24,7 +24,7 @@ namespace FoodMaster.WebSite.Commands.LoginGuest
         public async Task<Claim[]> Handle(GuestCredentials request, CancellationToken cancellationToken)
         {
             var userId = Guid.NewGuid().ToString();
-            var assignedRole = Roles.Guest.ToString();
+            var assignedRole = Role.Guest.ToString();
 
             var claims = new Claim[]
             {
