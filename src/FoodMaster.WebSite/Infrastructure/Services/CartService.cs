@@ -24,7 +24,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         {
             return cart.Join(
                     mealsService.GetAll(), 
-                    cartItem => cartItem.ItemId, 
+                    cartItem => cartItem.MealId, 
                     meal => meal.Id, 
                     (c, m) => new { c.Quantity, m.Price })
                 .Sum(item => item.Price * item.Quantity);
@@ -32,13 +32,13 @@ namespace FoodMaster.WebSite.Infrastructure.Services
 
         public CartItem GetByItemId(int itemId)
         {
-            return cart.FirstOrDefault(item => item.ItemId == itemId);
+            return cart.FirstOrDefault(item => item.MealId == itemId);
         }
 
         public void CreateFromItemId(int itemId)
         {
             var item = new CartItem {
-                ItemId = itemId,
+                MealId = itemId,
                 Quantity = 1
             };
 
@@ -59,7 +59,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
 
         public bool HasItemWithId(int itemId)
         {
-            return cart.Where(cartItem => cartItem.ItemId == itemId).Any();
+            return cart.Where(cartItem => cartItem.MealId == itemId).Any();
         }
 
         public IEnumerable<CartItem> GetAll()

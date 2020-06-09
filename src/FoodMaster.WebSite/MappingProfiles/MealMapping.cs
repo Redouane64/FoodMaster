@@ -11,12 +11,12 @@ namespace FoodMaster.WebSite
     {
         public MealMapping()
         {
-            CreateMap<Models.Meal, Domain.Meal>()
-                .ForMember(dest => dest.Category,
+            CreateMap<Commands.CreateMeal.Meal, Domain.Meal>()
+                .ForMember(dest => dest.CategoryId,
                     options => options.MapFrom<CategoryIdValueResolver, string>(s => s.Category));
         }
 
-        private class CategoryIdValueResolver : IMemberValueResolver<Models.Meal, Domain.Meal, string, int>
+        private class CategoryIdValueResolver : IMemberValueResolver<Commands.CreateMeal.Meal, Domain.Meal, string, int>
         {
             private readonly ICollection<Category> categories;
 
@@ -24,7 +24,7 @@ namespace FoodMaster.WebSite
             {
                 this.categories = categories;
             }
-            public int Resolve(Models.Meal source, Domain.Meal destination, string sourceMember, int destMember, ResolutionContext context)
+            public int Resolve(Commands.CreateMeal.Meal source, Domain.Meal destination, string sourceMember, int destMember, ResolutionContext context)
             {
                 return categories.FirstOrDefault(c => c.Name.Equals(sourceMember, StringComparison.OrdinalIgnoreCase))?.Id ?? -1;
             }

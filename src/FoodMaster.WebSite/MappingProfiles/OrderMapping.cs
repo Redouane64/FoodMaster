@@ -3,6 +3,7 @@ using System.Security.Claims;
 using AutoMapper;
 
 using FoodMaster.WebSite.Abstraction.Services;
+using FoodMaster.WebSite.Queries.Common;
 using Microsoft.AspNetCore.Http;
 
 namespace FoodMaster.WebSite.MappingProfiles
@@ -11,11 +12,11 @@ namespace FoodMaster.WebSite.MappingProfiles
     {
         public OrderMapping()
         {
-            CreateMap<Domain.Order, ViewModels.Order>()
+            CreateMap<Domain.Order, Order>()
                 .ForMember(dest => dest.Client, options => options.MapFrom<ClientFullNameValueResolver, string>(s => s.UserId));
         }
 
-        private class ClientFullNameValueResolver : IMemberValueResolver<Domain.Order, ViewModels.Order, string, string>
+        private class ClientFullNameValueResolver : IMemberValueResolver<Domain.Order, Order, string, string>
         {
             private readonly IUsersService usersService;
 
@@ -24,7 +25,7 @@ namespace FoodMaster.WebSite.MappingProfiles
                 this.usersService = usersService;
             }
 
-            public string Resolve(Domain.Order source, ViewModels.Order destination, string sourceMember, string destMember, ResolutionContext context)
+            public string Resolve(Domain.Order source, Order destination, string sourceMember, string destMember, ResolutionContext context)
             {
                 return usersService.GetById(source.UserId).FullName;
             }

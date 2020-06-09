@@ -24,7 +24,7 @@ namespace FoodMaster.WebSite.Infrastructure.Services
         {
             return this.GetPreparableMeals()
                         .GroupBy(
-                            item => item.Category, 
+                            item => item.CategoryId, 
                             (category, items) => new Domain.Menu { Category = category, Meals = items.ToArray() }
                         );
         }

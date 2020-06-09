@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace FoodMaster.WebSite.Domain
+﻿namespace FoodMaster.WebSite.Domain
 {
     public enum OrderStatus : int
     {

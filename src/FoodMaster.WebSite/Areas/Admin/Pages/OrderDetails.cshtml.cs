@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using FoodMaster.WebSite.Abstraction.Services;
+﻿using System.Threading.Tasks;
+
+using FoodMaster.WebSite.Queries.Common;
+using FoodMaster.WebSite.Queries.GetOrderDetails;
+
+using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,30 +14,27 @@ namespace FoodMaster.WebSite
     [Authorize(Roles = "Admin")]
     public class OrderDetailsModel : PageModel
     {
-        private readonly IOrdersService ordersService;
-        private readonly IMapper mapper;
+        private readonly IMediator mediator;
 
-        public OrderDetailsModel(IOrdersService ordersService, IMapper mapper)
+        public OrderDetailsModel(IMediator mediator)
         {
-            this.ordersService = ordersService;
-            this.mapper = mapper;
+            this.mediator = mediator;
         }
 
-        public ViewModels.Order Order { get; set; }
+        public Order Order { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
             if(RouteData.Values.TryGetValue("orderId", out var orderId))
             {
-                var order = ordersService.Get(order => order.Id == orderId.ToString());
+                var order = await mediator.Send(new GetOrderDetailsRequest() { OrderId = orderId.ToString() });
 
                 if (order is null)
                 {
                     return NotFound();
                 }
 
-                Order = mapper.Map<ViewModels.Order>(order);
-
+                Order = order;
             }
 
             return Page();

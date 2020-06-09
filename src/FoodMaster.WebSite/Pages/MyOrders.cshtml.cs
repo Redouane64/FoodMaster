@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
-using AutoMapper;
+using FoodMaster.WebSite.Queries.Common;
+using FoodMaster.WebSite.Queries.GetOrderDetails;
+using FoodMaster.WebSite.Queries.GetOrders;
 
-using FoodMaster.WebSite.Abstraction.Services;
+using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,37 +18,36 @@ namespace FoodMaster.WebSite
     [Authorize(Roles = "User,Guest")]
     public class MyOrdersModel : PageModel
     {
-        private readonly IOrdersService ordersService;
-        private readonly IMapper mapper;
+        private readonly IMediator mediator;
 
-        public MyOrdersModel(IOrdersService ordersService, IMapper mapper)
+        public MyOrdersModel(IMediator mediator)
         {
-            this.ordersService = ordersService;
-            this.mapper = mapper;
+            this.mediator = mediator;
         }
 
-        public IEnumerable<ViewModels.Order> Orders { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
 
-        public ViewModels.Order Order { get; set; }
+        public Order Order { get; set; }
 
-        public IActionResult OnGet([FromRoute]string orderId)
+        public async Task<IActionResult> OnGet([FromRoute]string orderId)
         {
+
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (String.IsNullOrEmpty(orderId))
             {
-                Orders = mapper.Map<IEnumerable<ViewModels.Order>>(ordersService.GetOrdersByUserId(userId));
+                Orders = await mediator.Send(new GetOrdersRequest() { UserId = userId });
             }
             else
             {
-                var order = ordersService.Get(order => order.Id == orderId);
+                var order = await mediator.Send(new GetOrderDetailsRequest() { OrderId = orderId });
                 
                 if(order == null)
                 {
                     return NotFound();
                 }
 
-                Order = mapper.Map<ViewModels.Order>(order);
+                Order = order;
             }
 
             return Page();
