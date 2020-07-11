@@ -33,6 +33,12 @@ namespace FoodMaster.WebSite.Areas.Account.Pages
         {
             if(!ModelState.IsValid)
             {
+                if(ModelState.ContainsKey("GuestCredentials.BirthDate"))
+                {
+                    ModelState.Remove("GuestCredentials.BirthDate");
+                    ModelState.AddModelError("GuestCredentials.BirthDate", "Invalid date.");
+                }
+
                 return Page();
             }
 
