@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
-namespace FoodMaster.WebSite.Models
+using MediatR;
+
+namespace FoodMaster.WebSite.Commands.LoginGuest
 {
-    public class GuestCredentials
+    public class GuestCredentials : IRequest<Claim[]>
     {
         [Required]
         [DataType(DataType.Text)]
