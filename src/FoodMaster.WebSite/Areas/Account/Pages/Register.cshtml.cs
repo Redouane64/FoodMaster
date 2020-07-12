@@ -32,6 +32,12 @@ namespace FoodMaster.WebSite
         {
             if(!ModelState.IsValid)
             {
+                if (ModelState.ContainsKey("UserDetails.BirthDate"))
+                {
+                    ModelState.Remove("UserDetails.BirthDate");
+                    ModelState.AddModelError("UserDetails.BirthDate", "Invalid date.");
+                }
+
                 return Page();
             }
 
