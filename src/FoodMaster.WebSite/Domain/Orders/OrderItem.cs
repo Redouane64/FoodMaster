@@ -1,8 +1,10 @@
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FoodMaster.WebSite.Domain
+using FoodMaster.WebSite.Domain.Menus;
+
+namespace FoodMaster.WebSite.Domain.Orders
 {
-    public class CartItem
+    public class OrderItem
     {
         [Column("id")]
         public int Id { get; set; }

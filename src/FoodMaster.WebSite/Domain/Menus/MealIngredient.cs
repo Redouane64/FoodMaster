@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FoodMaster.WebSite.Domain
+namespace FoodMaster.WebSite.Domain.Menus
 {
     public class MealIngredient
     {

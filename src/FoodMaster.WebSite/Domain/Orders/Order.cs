@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FoodMaster.WebSite.Domain
+using FoodMaster.WebSite.Domain.Customers;
+
+namespace FoodMaster.WebSite.Domain.Orders
 {
     public class Order
     {

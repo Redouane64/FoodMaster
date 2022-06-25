@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FoodMaster.WebSite.Domain
+namespace FoodMaster.WebSite.Domain.Menus
 {
-    public class Category
+    public class Ingredient
     {
         [Column("id")]
         public int Id { get; set; }
@@ -11,6 +11,10 @@ namespace FoodMaster.WebSite.Domain
         [Column("name")]
         public string Name { get; set; }
 
-        public ICollection<Menu> Menus { get; set; }
+        [Column("quantity")]
+        public int Quantity { get; set; }
+
+        public ICollection<MealIngredient> Meals { get; set; }
+
     }
 }

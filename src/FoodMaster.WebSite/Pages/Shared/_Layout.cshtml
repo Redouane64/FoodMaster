@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FoodMaster</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -18,64 +18,15 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-                            @if (User.IsInRole(Roles.Admin.ToString()))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-page="Menus">Menus</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-asp-area="" asp-page="Index">Menus</a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-
-                    <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse flex-sm-row-reverse">
-                        <ul class="nav justify-content-end">
-                            @if (User.IsInRole(Roles.Admin.ToString()))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-page="Orders">Orders</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Account" asp-page="Cart">Cart</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-page="MyOrders" asp-route-orderId="">Orders</a>
-                                </li>
-                            }
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Account" asp-page="GuestLogin" asp-page-handler="SignOut">Sign Out(@User.Identity.Name)</a>
-                            </li>
-                        </ul>
-                    </div>
-                }
-                else
-                {
-                    <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Account" asp-page="GuestLogin">Guest</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Account" asp-page="UserLogin">Sign In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Account" asp-page="Register">Create Account</a>
-                            </li>
-                        </ul>
-                    </div>
-                }
+                
+                <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                
             </div>
         </nav>
     </header>
@@ -91,8 +42,8 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)

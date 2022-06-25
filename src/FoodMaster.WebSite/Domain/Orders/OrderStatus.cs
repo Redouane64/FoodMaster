@@ -1,4 +1,4 @@
-﻿namespace FoodMaster.WebSite.Domain
+﻿namespace FoodMaster.WebSite.Domain.Orders
 {
     public enum OrderStatus : int
     {

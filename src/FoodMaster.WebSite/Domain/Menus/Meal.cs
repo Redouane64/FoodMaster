@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
-namespace FoodMaster.WebSite.Domain
+namespace FoodMaster.WebSite.Domain.Menus
 {
     public class Meal
     {

@@ -23,6 +23,19 @@
     <Folder Include="Data\Configurations" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Account\Pages\Cart.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Account\Pages\GuestLogin.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Account\Pages\Register.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Account\Pages\UserLogin.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Account\Pages\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Menus.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Pages\OrderDetails.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Orders.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Pages\_ViewImports.cshtml" />
+  </ItemGroup>
+
 
 
 </Project>
