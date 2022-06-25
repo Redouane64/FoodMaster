@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# client side library installation dir
+src/FoodMaster.WebSite/wwwroot/lib
