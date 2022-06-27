@@ -1,7 +1,7 @@
 [*]
 end_of_line = crlf
 
-[*.{cs,json}]
+[*.{cs,json, cshtml}]
 indent_style = space
 indent_size = 4
 
