@@ -343,3 +343,6 @@ healthchecksdb
 src/FoodMaster.WebSite/wwwroot/lib
 
 /src/FoodMaster.WebSite/current.json
+
+# database file
+foodmaster.db
