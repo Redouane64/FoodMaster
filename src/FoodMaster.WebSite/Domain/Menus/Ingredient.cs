@@ -1,20 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FoodMaster.WebSite.Domain.Menus
+﻿namespace FoodMaster.WebSite.Domain.Menus
 {
     public class Ingredient
     {
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("name")]
         public string Name { get; set; }
 
-        [Column("quantity")]
         public int Quantity { get; set; }
 
-        public ICollection<MealIngredient> Meals { get; set; }
+        public int DishId { get; set; }
+        public Dish Dish { get; set; }
 
     }
 }

@@ -11,7 +11,7 @@ namespace FoodMaster.WebSite.Domain.Orders
 
         [Column("meal_id")]
         public int MealId { get; set; }
-        public Meal Meal { get; set; }
+        public Dish Dish { get; set; }
 
         [Column("quantity")]
         public int Quantity { get; set; }
