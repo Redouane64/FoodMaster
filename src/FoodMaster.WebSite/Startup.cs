@@ -1,8 +1,9 @@
 using FoodMaster.WebSite.Data;
+using FoodMaster.WebSite.Infrastructure.Identity;
 
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,10 +25,13 @@ namespace FoodMaster.WebSite
             services.AddRazorPages();
             services.AddControllers();
 
-            services.AddDbContext<FoodMasterDataContext>(options =>
+            services.Configure<AntiforgeryOptions>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("Default"));
+                options.Cookie.Name = "_Antiforgery";
             });
+
+            services.AddDataServices(Configuration);
+            services.AddIdentityServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

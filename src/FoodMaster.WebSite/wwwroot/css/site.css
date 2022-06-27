@@ -83,3 +83,13 @@ body {
 a:hover {
     cursor: pointer;
 }
+
+/* validation summary */
+.validation-summary-errors ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.validation-summary-errors ul li {
+  text-align: center;
+}

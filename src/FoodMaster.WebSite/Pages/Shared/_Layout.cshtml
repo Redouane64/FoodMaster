@@ -21,9 +21,20 @@
                 
                 <div class="navbar-nav navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity?.IsAuthenticated == false)
+                        {
                         <li class="nav-item">
-                            <a class="nav-link">Login</a>
+                            <a class="nav-link" asp-page="AuthenticatePage">Login</a>
                         </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            <form asp-area="Account" asp-page="AuthenticatePage" asp-page-handler="SignOut" id="signout-form">
+                               <a class="nav-link" id="signout" onclick="signout()">Sign Out</a>
+                            </form>
+                        </li>
+                        }
                     </ul>
                 </div>
                 

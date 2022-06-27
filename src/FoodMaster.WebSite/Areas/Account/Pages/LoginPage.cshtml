@@ -1,0 +1,30 @@
+@page "/Account/Login"
+
+@model FoodMaster.WebSite.Areas.Account.Pages.LoginPage
+
+@{
+  Layout = "_Layout";
+  ViewData["Title"] = "Login";
+}
+
+<div class="d-flex justify-content-center pb-4">
+  <p class="display-4">FoodMaster Dashboard</p>
+</div>
+<div class="d-flex justify-content-center">
+  <form asp-page="AuthenticatePage">
+    <div class="mb-3">
+      <label class="form-label" asp-for="Email"></label>
+      <input type="email" class="form-control" asp-for="Email">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" asp-for="Password"></label>
+      <input type="password" class="form-control" asp-for="Password">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" asp-for="RememberMe">
+      <label class="form-check-label" asp-for="RememberMe"></label>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <button type="submit" class="btn btn-primary">Sign In</button>
+  </form>
+</div>

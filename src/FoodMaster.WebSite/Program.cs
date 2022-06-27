@@ -1,20 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
+using FoodMaster.WebSite.Infrastructure;
+
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace FoodMaster.WebSite
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var app = CreateHostBuilder(args).Build();
+
+            await app.InitializeDefaultRoles();
+            await app.InitializeDefaultUser();
+
+            await app.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

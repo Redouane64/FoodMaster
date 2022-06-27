@@ -93,3 +93,10 @@ function confirmOrder(checkBox) {
     if (checkBox.checked) sendOrderButton.disabled = "";
     else sendOrderButton.disabled = "disable";
 }
+
+function signout() {
+    let signoutForm = document.getElementById("signout-form");
+    if (signoutForm) {
+        signoutForm.submit();
+    }
+}
