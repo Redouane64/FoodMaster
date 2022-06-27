@@ -70,10 +70,11 @@ public static class ApplicationExtensions
             {
                 Email = configuration.GetValue<string>("DefaultSettings:DefaultUser:Email"),
                 UserName = configuration.GetValue<string>("DefaultSettings:DefaultUser:UserName"),
-                FullName = configuration.GetValue<string>("DefaultSettings:DefaultUser:Password"),
+                FullName = configuration.GetValue<string>("DefaultSettings:DefaultUser:UserName"),
             };
 
-            var createUserResult = await userManager.CreateAsync(user, "admin1");
+            var password = configuration.GetValue<string>("DefaultSettings:DefaultUser:Password");
+            var createUserResult = await userManager.CreateAsync(user, password);
             if (!createUserResult.Succeeded)
             {
                 await transaction.RollbackAsync();
