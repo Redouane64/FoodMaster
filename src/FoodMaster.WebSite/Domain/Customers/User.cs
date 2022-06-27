@@ -8,6 +8,6 @@ namespace FoodMaster.WebSite.Domain.Customers
     {
         public string FullName { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
     }
 }
